@@ -3,642 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechWise BW - Educator Platform</title>
-    
-    <!-- External Dependencies -->
+    <title>TechWise BW Suite</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; }
-        
-        .menu-btn-active { 
-            background-color: #D97706 !important; 
-            color: #0F172A !important; 
-            font-weight: 800 !important;
-            border-color: #D97706 !important;
-            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
-        }
-    </style>
 </head>
-<body class="text-slate-800 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
 
-    <!-- Top Header & Navigation -->
-    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
-        <!-- 14-Day Free Trial Bar -->
-        <div class="bg-amber-500 text-slate-950 font-bold text-xs py-1.5 px-4 text-center flex items-center justify-center gap-2 shadow-inner">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span><strong>14-DAY FREE TRIAL ACTIVE:</strong> Enjoy full access before your 6-Month Payroll Stop Order commences.</span>
-            <button onclick="openStopOrderModal()" class="bg-slate-950 text-amber-400 text-[11px] px-2 py-0.5 rounded font-extrabold ml-2 hover:bg-slate-800 transition">Setup Stop Order Mandate</button>
+    <!-- Top Trial Notification Banner -->
+    <div class="bg-amber-400 text-slate-950 px-4 py-2 text-xs font-bold flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-2 mx-auto">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>14-DAY FREE TRIAL ACTIVE: Enjoy full access before your 6-Month Payroll Stop Order commences.</span>
         </div>
+        <button class="bg-slate-900 text-amber-400 px-3 py-1 rounded text-xs hover:bg-slate-800 transition">
+            Setup Stop Order Mandate
+        </button>
+    </div>
 
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center border-b border-slate-800">
-            <div class="flex items-center space-x-3">
-                <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl font-black text-xl shadow-inner">
-                    <i class="fa-solid fa-graduation-cap"></i>
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-950 px-6 py-4 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center space-x-3">
+            <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl font-black text-xl flex items-center justify-center w-10 h-10">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <div class="flex items-center space-x-2">
+                    <h1 class="text-xl font-black tracking-tight text-white">TechWise</h1>
+                    <span class="bg-slate-800 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">BW Suite</span>
                 </div>
-                <div>
-                    <h1 class="font-extrabold text-lg tracking-tight text-white leading-none flex items-center gap-2">
-                        TechWise <span class="text-amber-400 text-xs px-2 py-0.5 bg-slate-800 rounded-full font-semibold border border-amber-500/30">BW Suite</span>
-                    </h1>
-                    <p class="text-[11px] text-slate-400 mt-1 font-medium">Empowering Botswana Educators with Global Innovation</p>
-                </div>
-            </div>
-
-            <!-- Header Quick Action Settings -->
-            <div class="flex items-center space-x-2">
-                <button onclick="openApiSettings()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold px-3 py-2 rounded-lg border border-amber-500/30 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-bolt text-amber-400"></i>
-                    <span class="hidden sm:inline">Groq AI Settings</span>
-                </button>
-                <button onclick="openStopOrderModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-lg shadow-md transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-file-signature"></i>
-                    <span>6-Month Stop Order Mandate</span>
-                </button>
+                <p class="text-xs text-slate-400">Empowering Botswana Educators with Global Innovation</p>
             </div>
         </div>
 
-        <!-- Main Navigation Tabs -->
-        <div class="bg-slate-950 border-b border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 py-2">
-                <nav class="grid grid-cols-2 sm:grid-cols-5 gap-2">
-                    <button onclick="switchTab('quizGen')" id="tab-quizGen" class="menu-btn menu-btn-active py-2.5 px-3 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 transition">
-                        <i class="fa-solid fa-file-pen text-amber-400"></i>
-                        <span>Exam Generator</span>
-                    </button>
-
-                    <button onclick="switchTab('lessonPlan')" id="tab-lessonPlan" class="menu-btn py-2.5 px-3 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 hover:bg-slate-800 transition">
-                        <i class="fa-solid fa-calendar-check text-slate-400"></i>
-                        <span>Lesson Planner</span>
-                    </button>
-
-                    <button onclick="switchTab('studentReport')" id="tab-studentReport" class="menu-btn py-2.5 px-3 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 hover:bg-slate-800 transition">
-                        <i class="fa-solid fa-user-check text-slate-400"></i>
-                        <span>Report Writer</span>
-                    </button>
-
-                    <button onclick="switchTab('academy')" id="tab-academy" class="menu-btn py-2.5 px-3 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 hover:bg-slate-800 transition">
-                        <i class="fa-solid fa-book-open text-slate-400"></i>
-                        <span>Teacher Academy</span>
-                    </button>
-
-                    <button onclick="switchTab('globalRadar')" id="tab-globalRadar" class="menu-btn col-span-2 sm:col-span-1 py-2.5 px-3 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 hover:bg-slate-800 transition">
-                        <i class="fa-solid fa-globe text-amber-400"></i>
-                        <span>Global EdTech Radar</span>
-                    </button>
-                </nav>
-            </div>
-        </div>
+        <button onclick="toggleKeyModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition">
+            <i class="fa-solid fa-bolt text-amber-400"></i>
+            <span>Groq AI Settings</span>
+        </button>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
-
-        <!-- Curriculum Alignment Banner -->
-        <div class="bg-white p-3.5 mb-6 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between text-xs">
-            <div class="flex items-center space-x-3 text-slate-700 font-medium">
-                <span class="bg-amber-100 text-amber-700 p-1.5 rounded-lg">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </span>
-                <span>Aligned with <strong>BEC Guidelines & Curriculum Standards</strong> (PSLE, JCE & BGCSE)</span>
-            </div>
-            <div class="flex items-center space-x-3">
-                <span class="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md text-[11px]">14 Days Free Active</span>
-            </div>
+    <!-- Main Navigation Tabs -->
+    <div class="px-6 pt-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-950 p-1.5 rounded-2xl border border-slate-800">
+            <button class="bg-amber-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Exam Generator</span>
+            </button>
+            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span>Lesson Planner</span>
+            </button>
+            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+                <i class="fa-solid fa-user-pen"></i>
+                <span>Report Writer</span>
+            </button>
+            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Teacher Academy</span>
+            </button>
         </div>
+    </div>
 
-        <!-- EXAM & QUIZ GENERATOR -->
-        <section id="quizGen-content" class="tab-panel">
-            <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Exam & Quiz Paper Generator</h2>
-                <p class="text-xs text-slate-500">Produce curriculum-matched exam papers and auto-generated marking keys via Groq AI.</p>
+    <!-- Main Content Grid -->
+    <main class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Options Form -->
+        <div class="lg:col-span-5 bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-5">
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Subject</label>
+                <select id="quizSubject" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                    <option value="Integrated Science">Integrated Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="English Language">English Language</option>
+                    <option value="Social Studies">Social Studies</option>
+                    <option value="Setswana">Setswana</option>
+                    <option value="Agriculture">Agriculture</option>
+                </select>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject</label>
-                        <select id="quizSubject" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white outline-none">
-                            <option value="Integrated Science">Integrated Science</option>
-                            <option value="Mathematics">Mathematics</option>
-                            <option value="English Language">English Language</option>
-                            <option value="Social Studies">Social Studies</option>
-                            <option value="Setswana">Setswana</option>
-                            <option value="Agriculture">Agriculture</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Grade Level</label>
-                        <select id="quizLevel" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white outline-none">
-                            <option value="PSLE (Standard 5-7)">PSLE (Standard 5 - 7)</option>
-                            <option value="JCE (Form 1-3)">JCE (Form 1 - 3)</option>
-                            <option value="BGCSE (Form 4-5)">BGCSE (Form 4 - 5)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Syllabus Topic</label>
-                        <input type="text" id="quizTopic" placeholder="e.g., Photosynthesis, Okavango Ecosystems" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Number of Questions</label>
-                        <select id="quizCount" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
-                            <option value="5">5 Questions</option>
-                            <option value="10" selected>10 Questions</option>
-                        </select>
-                    </div>
-
-                    <button onclick="generateAssessmentWithGroq()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition flex justify-center items-center space-x-2">
-                        <i class="fa-solid fa-bolt text-amber-400"></i>
-                        <span>Generate Test Paper</span>
-                    </button>
-                </div>
-
-                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center border-b pb-3 mb-4">
-                            <h3 class="font-extrabold text-xs text-slate-900 uppercase">Assessment Preview</h3>
-                            <button onclick="exportToPDF('quizOutput', 'TechWise_Assessment')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
-                                <i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> Print / Download
-                            </button>
-                        </div>
-
-                        <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[320px]">
-                            <div class="text-center text-slate-400 py-16">
-                                <i class="fa-solid fa-file-signature text-5xl mb-3 text-slate-300"></i>
-                                <p class="text-xs font-medium">Configure options on the left and click <strong>"Generate Test Paper"</strong>.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- LESSON PLANNER -->
-        <section id="lessonPlan-content" class="tab-panel hidden">
-            <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Lesson Plan Builder</h2>
-                <p class="text-xs text-slate-500">Create structured 40-minute lesson plans with teacher activities and learner tasks.</p>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Grade Level</label>
+                <select id="quizLevel" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                    <option value="PSLE (Standard 5 - 7)">PSLE (Standard 5 - 7)</option>
+                    <option value="JCE (Form 1 - 3)">JCE (Form 1 - 3)</option>
+                    <option value="BGCSE (Form 4 - 5)">BGCSE (Form 4 - 5)</option>
+                </select>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject & Class Level</label>
-                        <input type="text" id="lpSubject" placeholder="e.g., Social Studies, Form 2" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Objective</label>
-                        <textarea id="lpObjective" rows="3" placeholder="e.g., Learners will identify causes of soil erosion..." class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none"></textarea>
-                    </div>
-
-                    <button onclick="generateLessonPlanWithGroq()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
-                        Generate Lesson Plan
-                    </button>
-                </div>
-
-                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h3 class="font-extrabold text-xs text-slate-900 uppercase">Lesson Plan Output</h3>
-                        <button onclick="exportToPDF('lpOutput', 'TechWise_LessonPlan')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
-                            <i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> Print / Download
-                        </button>
-                    </div>
-                    <div id="lpOutput" class="prose max-w-none text-slate-800 text-sm min-h-[320px]">
-                        <div class="text-center text-slate-400 py-16">
-                            <i class="fa-solid fa-calendar-day text-5xl mb-3 text-slate-300"></i>
-                            <p class="text-xs font-medium">Enter your lesson details to generate the breakdown.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- STUDENT REPORT WRITER -->
-        <section id="studentReport-content" class="tab-panel hidden">
-            <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Student Report Remark Generator</h2>
-                <p class="text-xs text-slate-500">Generate constructive end-of-term remarks formatted in English and Setswana.</p>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Syllabus Topic</label>
+                <input id="quizTopic" type="text" placeholder="e.g. Photosynthesis, Fractions, BEC Ecosystems" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Student Profile</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50">
-                            <select id="repGender" class="text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50">
-                                <option value="Male">Boy</option>
-                                <option value="Female">Girl</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Performance Details</label>
-                        <textarea id="repNotes" rows="3" placeholder="e.g., Score: 78%, strong engagement, punctual..." class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50"></textarea>
-                    </div>
-
-                    <button onclick="generateReportWithGroq()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
-                        Generate Remark
-                    </button>
-                </div>
-
-                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h3 class="font-extrabold text-xs text-slate-900 uppercase">Generated Remarks</h3>
-                        <button onclick="navigator.clipboard.writeText(document.getElementById('repOutput').innerText)" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
-                            <i class="fa-solid fa-copy text-amber-600 mr-1"></i> Copy Text
-                        </button>
-                    </div>
-                    <div id="repOutput" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-sm leading-relaxed min-h-[220px]">
-                        <p class="text-slate-400 italic text-center py-12 text-xs">Generated student remarks will be displayed here...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TEACHER ACADEMY -->
-        <section id="academy-content" class="tab-panel hidden">
-            <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Teacher Professional Academy</h2>
-                <p class="text-xs text-slate-500">Interactive micro-modules designed to strengthen classroom teaching methods.</p>
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Number of Questions</label>
+                <select id="quizCount" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+                    <option value="5">5 Questions</option>
+                    <option value="10" selected>10 Questions</option>
+                    <option value="15">15 Questions</option>
+                </select>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-chalkboard-user"></i></div>
-                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">BEC Objective Assessment Construction</h3>
-                        <p class="text-xs text-slate-500 mb-3">Master structural design for multiple-choice and short-answer assessment items.</p>
-                    </div>
-                    <button onclick="openAcademyModule('bec')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
-                        Open Module
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-laptop-code"></i></div>
-                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">Digital Pedagogy & Blended Learning</h3>
-                        <p class="text-xs text-slate-500 mb-3">Incorporate offline multimedia tools into rural and urban classrooms.</p>
-                    </div>
-                    <button onclick="openAcademyModule('digital')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
-                        Open Module
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-users-gear"></i></div>
-                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">Mixed-Ability Classroom Management</h3>
-                        <p class="text-xs text-slate-500 mb-3">Strategies for differentiating instruction in larger class settings.</p>
-                    </div>
-                    <button onclick="openAcademyModule('mixed')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
-                        Open Module
-                    </button>
-                </div>
-            </div>
-
-            <div id="academyModuleContainer" class="hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <div class="flex justify-between items-center border-b pb-3 mb-4">
-                    <h3 id="academyModuleTitle" class="font-extrabold text-base text-slate-900">Module Viewer</h3>
-                    <button onclick="closeAcademyModule()" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border">Close Module</button>
-                </div>
-                <div id="academyModuleBody" class="prose max-w-none text-slate-700 text-sm"></div>
-            </div>
-        </section>
-
-        <!-- GLOBAL EDTECH RADAR -->
-        <section id="globalRadar-content" class="tab-panel hidden">
-            <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                    Global Education Radar
-                    <span class="text-xs font-semibold bg-amber-500/10 text-amber-700 border border-amber-500/30 px-2 py-0.5 rounded-full">World Insights</span>
-                </h2>
-                <p class="text-xs text-slate-500">Discover key trends and innovations shaping modern classrooms globally.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">China</span>
-                            <span class="text-[11px] text-slate-400">Classroom Tech</span>
-                        </div>
-                        <h3 class="font-bold text-sm text-slate-900 mb-1">Smart Electronic Desks & Focus Aids</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Interactive touch surface desks providing real-time feedback and direct exercise submission to the instructor's display.</p>
-                    </div>
-                    <button onclick="summarizeGlobalTech('China Smart Desks')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
-                        View Brief
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">Singapore</span>
-                            <span class="text-[11px] text-slate-400">Automated Grading</span>
-                        </div>
-                        <h3 class="font-bold text-sm text-slate-900 mb-1">AI Marking Assistants for Open Essays</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Automated evaluation systems giving formative language feedback to help teachers mark written work faster.</p>
-                    </div>
-                    <button onclick="summarizeGlobalTech('Singapore AI Marking')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
-                        View Brief
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Kenya</span>
-                            <span class="text-[11px] text-slate-400">Rural Access</span>
-                        </div>
-                        <h3 class="font-bold text-sm text-slate-900 mb-1">Solar Digital Hubs & Offline Kits</h3>
-                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Solar-powered server units broadcasting digital learning materials to offline student devices in remote regions.</p>
-                    </div>
-                    <button onclick="summarizeGlobalTech('Kenya Solar Hubs')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
-                        View Brief
-                    </button>
-                </div>
-            </div>
-
-            <div id="radarDetail" class="hidden mt-6 bg-slate-900 text-white p-6 rounded-2xl shadow-lg border border-slate-800">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-3">
-                    <h3 id="radarTitle" class="font-bold text-sm text-amber-400">Tech Brief Details</h3>
-                    <button onclick="document.getElementById('radarDetail').classList.add('hidden')" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
-                </div>
-                <p id="radarContent" class="text-xs text-slate-300 leading-relaxed"></p>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <div class="mt-12 pt-6 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
-            <span>TechWise Professional Platform &copy; 2026</span>
-            <button onclick="toggleAdminModal()" class="hover:text-slate-900 font-semibold text-slate-600">
-                <i class="fa-solid fa-user-shield mr-1"></i> Admin Panel
+            <button onclick="generateAssessmentWithGroq()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg transition">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Generate Test Paper</span>
             </button>
         </div>
 
+        <!-- Right Column: Output Preview -->
+        <div class="lg:col-span-7 bg-white text-slate-900 border border-slate-800 p-6 rounded-2xl min-h-[450px] shadow-2xl">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Assessment Preview</h3>
+            
+            <div id="quizOutput">
+                <div class="text-center py-20 text-slate-400">
+                    <i class="fa-solid fa-file-circle-plus text-4xl mb-3 text-slate-300"></i>
+                    <p class="text-xs">Configure options on the left and click <strong>"Generate Test Paper"</strong> to create an assessment.</p>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <!-- PAYROLL STOP ORDER DEDUCTION MANDATE MODAL -->
-    <div id="stopOrderModal" class="fixed inset-0 bg-slate-900/70 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4 overflow-y-auto">
-        <div class="bg-white max-w-xl w-full rounded-2xl shadow-2xl p-6 text-left my-8">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <div>
-                    <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
-                        <i class="fa-solid fa-file-contract text-amber-600"></i>
-                        PAYROLL STOP ORDER DEDUCTION MANDATE
-                    </h3>
-                    <p class="text-xs text-slate-500">6-Month Commitment Authorization (Post 14-Day Free Trial)</p>
-                </div>
-                <button onclick="closeStopOrderModal()" class="text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
-            </div>
-
-            <form id="stopOrderForm" onsubmit="submitStopOrder(event)" class="space-y-4 text-xs">
-                
-                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-amber-900 leading-relaxed">
-                    <strong>Mandate Terms:</strong> By completing this agreement, you authorize a recurring <strong>Payroll Stop Order</strong> for a fixed period of <strong>6 months</strong> starting automatically at the conclusion of your 14-day free trial.
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block font-bold text-slate-700 uppercase mb-1">Full Name (as on Payroll)</label>
-                        <input type="text" id="soName" required placeholder="e.g. Kgosi Motswai" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
-                    </div>
-                    <div>
-                        <label class="block font-bold text-slate-700 uppercase mb-1">Omang / National ID</label>
-                        <input type="text" id="soOmang" required placeholder="e.g. 123456789" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
-                    </div>
-                    <div>
-                        <label class="block font-bold text-slate-700 uppercase mb-1">Payroll / Treasury Number</label>
-                        <input type="text" id="soPayroll" required placeholder="e.g. P987654" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
-                    </div>
-                    <div>
-                        <label class="block font-bold text-slate-700 uppercase mb-1">School / Workstation</label>
-                        <input type="text" id="soStation" required placeholder="e.g. Moeding College" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
-                    </div>
-                </div>
-
-                <div class="border-t pt-3">
-                    <label class="block font-bold text-slate-700 uppercase mb-2">Union Status & Monthly Rate</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="border border-slate-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100">
-                            <input type="radio" name="unionRate" value="120" checked onchange="updateMandateSummary(120)">
-                            <div>
-                                <div class="font-bold text-slate-900">BOSETU / BTU Member</div>
-                                <div class="text-[11px] text-amber-700 font-semibold">P120 / month x 6 Months</div>
-                            </div>
-                        </label>
-                        <label class="border border-slate-200 p-3 rounded-xl flex items-center gap-2 cursor-pointer bg-slate-50 hover:bg-slate-100">
-                            <input type="radio" name="unionRate" value="150" onchange="updateMandateSummary(150)">
-                            <div>
-                                <div class="font-bold text-slate-900">Non-Union Member</div>
-                                <div class="text-[11px] text-slate-500 font-semibold">P150 / month x 6 Months</div>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 text-white p-4 rounded-xl text-xs space-y-1">
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Trial Period:</span>
-                        <span class="text-emerald-400 font-bold">14 Days Free (P0.00)</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Stop Order Duration:</span>
-                        <span class="text-white font-bold">6 Consecutive Months</span>
-                    </div>
-                    <div class="flex justify-between border-t border-slate-800 pt-1.5 mt-1">
-                        <span class="text-amber-400 font-bold">Monthly Deduction:</span>
-                        <span id="mandateTotalDisplay" class="text-amber-400 font-extrabold text-sm">P120.00 / mo</span>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block font-bold text-slate-700 uppercase mb-1">Digital Signature (Type Full Name)</label>
-                    <input type="text" id="soSignature" required placeholder="I hereby authorize payroll deduction" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
-                </div>
-
-                <div class="flex items-start gap-2">
-                    <input type="checkbox" required id="agreeTerms" class="mt-0.5">
-                    <label for="agreeTerms" class="text-[11px] text-slate-600">I confirm that the government payroll unit is authorized to deduct the specified monthly sum for 6 months after my 14-day trial ends.</label>
-                </div>
-
-                <div class="flex gap-2">
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3 rounded-xl shadow transition text-sm">
-                        Submit Stop Order Authorization
-                    </button>
-                    <button type="button" onclick="exportStopOrderPDF()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-4 py-3 rounded-xl border text-xs whitespace-nowrap">
-                        <i class="fa-solid fa-download mr-1"></i> Save Form PDF
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Groq API Key Config Modal -->
-    <div id="apiModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
-        <div class="bg-white max-w-md w-full rounded-2xl shadow-2xl p-6">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-bolt text-amber-500"></i>
-                    Configure Groq AI Engine
+    <!-- Groq API Key Modal -->
+    <div id="keyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl max-w-md w-full space-y-4 text-slate-100 shadow-2xl">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-sm text-amber-400 flex items-center space-x-2">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Groq API Key Settings</span>
                 </h3>
-                <button onclick="closeApiSettings()" class="text-slate-400 hover:text-slate-600">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <p class="text-xs text-slate-500">Enter your Groq API key below (`gsk_...`) to activate direct AI generation via <code>llama-3.3-70b-versatile</code>.</p>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Groq API Key</label>
-                    <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full text-sm border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
-                </div>
-                <button onclick="saveGroqApiKey()" class="w-full bg-slate-900 text-amber-400 font-bold py-3 rounded-xl text-sm hover:bg-slate-800 transition">
-                    Save Key
+                <button onclick="toggleKeyModal()" class="text-slate-400 hover:text-white text-xs">
+                    <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-        </div>
-    </div>
-
-    <!-- Admin Panel Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
-        <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl p-6">
-            <div class="flex justify-between items-center mb-4 border-b pb-2">
-                <h3 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> Admin Management Dashboard</h3>
-                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
+            <p class="text-xs text-slate-400 leading-relaxed">Enter your Groq API key (starts with <code>gsk_</code>). It will be saved securely in your browser's local storage.</p>
+            <input id="groqApiKey" type="password" placeholder="gsk_..." class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="toggleKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300">Cancel</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950">Save Key</button>
             </div>
-            <div class="grid grid-cols-2 gap-3 text-center mb-4">
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <div class="text-xs text-slate-500">Active Stop Orders</div>
-                    <div id="adminOrderCount" class="text-lg font-bold text-slate-900">0</div>
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
-                    <div class="text-xs text-slate-500">Monthly Revenue</div>
-                    <div id="adminTotalRevenue" class="text-lg font-bold text-amber-600">P0.00</div>
-                </div>
-            </div>
-            <p class="text-xs text-slate-500 mb-3">Saved locally in browser localStorage for offline capability.</p>
-            <button onclick="clearSavedData()" class="w-full bg-red-50 text-red-600 border border-red-200 font-bold py-2 rounded-xl text-xs hover:bg-red-100 transition">
-                Clear Saved Submissions
-            </button>
         </div>
     </div>
 
     <!-- Application JavaScript -->
     <script>
-        let selectedRate = 120;
-
-        window.addEventListener('DOMContentLoaded', () => {
+        // Modal Controls
+        function toggleKeyModal() {
+            const modal = document.getElementById('keyModal');
+            modal.classList.toggle('hidden');
             const savedKey = localStorage.getItem('groq_api_key');
             if (savedKey) {
                 document.getElementById('groqApiKey').value = savedKey;
             }
-            updateAdminDashboard();
-        });
+        }
 
-        function openStopOrderModal() { document.getElementById('stopOrderModal').classList.remove('hidden'); }
-        function closeStopOrderModal() { document.getElementById('stopOrderModal').classList.add('hidden'); }
-        function openApiSettings() { document.getElementById('apiModal').classList.remove('hidden'); }
-        function closeApiSettings() { document.getElementById('apiModal').classList.add('hidden'); }
-        function toggleAdminModal() { updateAdminDashboard(); document.getElementById('adminModal').classList.toggle('hidden'); }
-
-        function saveGroqApiKey() {
+        function saveApiKey() {
             const key = document.getElementById('groqApiKey').value.trim();
-            if (!key) {
-                alert('Please enter a valid Groq API key (starts with gsk_).');
+            if (key) {
+                localStorage.setItem('groq_api_key', key);
+                alert('API Key saved successfully!');
+            } else {
+                localStorage.removeItem('groq_api_key');
+                alert('API Key cleared.');
+            }
+            toggleKeyModal();
+        }
+
+        // Assessment Generation Function with Fallback Fix
+        async function generateAssessmentWithGroq() {
+            const subject = document.getElementById('quizSubject').value;
+            const level = document.getElementById('quizLevel').value;
+            const topic = document.getElementById('quizTopic').value || 'Core Syllabus';
+            const count = document.getElementById('quizCount').value;
+            const output = document.getElementById('quizOutput');
+
+            output.innerHTML = `
+                <div class="text-center py-12 text-slate-600">
+                    <i class="fa-solid fa-bolt text-amber-500 text-3xl animate-bounce mb-3"></i>
+                    <p class="font-bold text-xs">Generating ${count}-Question Assessment...</p>
+                </div>
+            `;
+
+            const apiKey = localStorage.getItem('groq_api_key') || (document.getElementById('groqApiKey') ? document.getElementById('groqApiKey').value.trim() : '');
+
+            // FIX: IF NO API KEY IS PRESENT, SHOW DEMO SAMPLE ASSESSMENT INSTEAD OF ERROR
+            if (!apiKey) {
+                setTimeout(() => {
+                    output.innerHTML = `
+                        <div class="p-4 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs mb-4">
+                            <strong>Demo Mode:</strong> Add a Groq API Key via "Groq AI Settings" for live AI generation.
+                        </div>
+                        <h2 class="text-lg font-bold text-slate-900 border-b pb-2 mb-3">${subject} (${level}) - Assessment Paper</h2>
+                        <p class="text-xs text-slate-500 mb-4"><strong>Topic:</strong> ${topic}</p>
+                        <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-800">
+                            <li>What is the primary function of ecosystem processes in relation to <strong>${topic}</strong>?
+                                <div class="pl-3 mt-1 text-slate-600">A) Energy flow &nbsp;&nbsp; B) Soil erosion &nbsp;&nbsp; C) Condensation &nbsp;&nbsp; D) Evaporation</div>
+                            </li>
+                            <li>Identify the correct sequence associated with <strong>${topic}</strong> under BEC curriculum standards.
+                                <div class="pl-3 mt-1 text-slate-600">A) Option A &nbsp;&nbsp; B) Option B &nbsp;&nbsp; C) Option C &nbsp;&nbsp; D) Option D</div>
+                            </li>
+                        </ol>
+                        <hr class="my-4">
+                        <h3 class="font-bold text-xs text-emerald-700">Marking Key:</h3>
+                        <p class="text-xs text-slate-600">1. A &nbsp;|&nbsp; 2. B</p>
+                    `;
+                }, 800);
                 return;
             }
-            localStorage.setItem('groq_api_key', key);
-            alert('Groq API Key saved successfully!');
-            closeApiSettings();
-        }
 
-        function updateMandateSummary(rate) {
-            selectedRate = rate;
-            document.getElementById('mandateTotalDisplay').innerText = `P${rate}.00 / mo`;
-        }
-
-        function submitStopOrder(e) {
-            e.preventDefault();
-            const orderData = {
-                name: document.getElementById('soName').value,
-                omang: document.getElementById('soOmang').value,
-                payroll: document.getElementById('soPayroll').value,
-                station: document.getElementById('soStation').value,
-                rate: selectedRate,
-                signature: document.getElementById('soSignature').value,
-                date: new Date().toISOString()
-            };
-
-            const existingOrders = JSON.parse(localStorage.getItem('techwise_stop_orders') || '[]');
-            existingOrders.push(orderData);
-            localStorage.setItem('techwise_stop_orders', JSON.stringify(existingOrders));
-
-            alert("Stop Order Authorization Submitted! Your 14-Day Free Trial is active.");
-            closeStopOrderModal();
-            updateAdminDashboard();
-        }
-
-        function updateAdminDashboard() {
-            const orders = JSON.parse(localStorage.getItem('techwise_stop_orders') || '[]');
-            document.getElementById('adminOrderCount').innerText = orders.length;
-            const total = orders.reduce((sum, ord) => sum + (ord.rate || 0), 0);
-            document.getElementById('adminTotalRevenue').innerText = `P${total}.00`;
-        }
-
-        function clearSavedData() {
-            if (confirm('Clear all saved local submissions?')) {
-                localStorage.removeItem('techwise_stop_orders');
-                updateAdminDashboard();
+            // LIVE GROQ API CALL
+            try {
+                const prompt = `Create a ${count}-question exam paper for ${level} students in Botswana taking ${subject}. Topic: "${topic}". Include multiple choice options and a marking key at the bottom. Format with clean HTML.`;
+                const result = await callGroqAPI(prompt, apiKey);
+                output.innerHTML = result;
+            } catch (err) {
+                output.innerHTML = `
+                    <div class="p-4 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl">
+                        <strong>API Error:</strong> ${err.message}. Please check your key in <em>Groq AI Settings</em>.
+                    </div>
+                `;
             }
         }
 
-        function exportStopOrderPDF() {
-            const form = document.getElementById('stopOrderForm');
-            html2pdf().from(form).save('TechWise_StopOrder_Mandate.pdf');
-        }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.menu-btn').forEach(el => {
-                el.classList.remove('menu-btn-active');
-                el.classList.add('bg-slate-900');
-            });
-            
-            document.getElementById(tabId + '-content').classList.remove('hidden');
-            const activeBtn = document.getElementById('tab-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('menu-btn-active');
-                activeBtn.classList.remove('bg-slate-900');
-            }
-        }
-
-        async function callGroqAPI(promptText) {
-            const apiKey = localStorage.getItem('groq_api_key') || document.getElementById('groqApiKey').value.trim();
-            if (!apiKey) {
-                openApiSettings();
-                throw new Error("Please configure your Groq API Key first.");
-            }
-
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
+        // Groq API Endpoint Request Handler
+        async function callGroqAPI(prompt, apiKey) {
+            const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${apiKey}`,
-                    "Content-Type": "application/json"
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: "llama-3.3-70b-versatile",
-                    messages: [
-                        { role: "system", content: "You are an expert curriculum assistant for Botswana schools, following BEC guidelines." },
-                        { role: "user", content: promptText }
-                    ],
-                    temperature: 0.5
+                    model: 'llama3-8b-8192',
+                    messages: [{ role: 'user', content: prompt }]
                 })
             });
 
@@ -649,132 +246,6 @@
 
             const data = await response.json();
             return data.choices[0].message.content;
-        }
-
-        async function generateAssessmentWithGroq() {
-            const subject = document.getElementById('quizSubject').value;
-            const level = document.getElementById('quizLevel').value;
-            const topic = document.getElementById('quizTopic').value || 'Core Curriculum Concepts';
-            const count = document.getElementById('quizCount').value;
-            const output = document.getElementById('quizOutput');
-
-            output.innerHTML = `
-                <div class="text-center py-12 text-slate-600">
-                    <i class="fa-solid fa-bolt text-amber-500 text-3xl animate-bounce mb-3"></i>
-                    <p class="font-bold text-xs">Generating ${count}-Question Assessment via Groq AI...</p>
-                </div>
-            `;
-
-            const prompt = `Create a ${count}-question exam assessment paper for ${level} students in Botswana taking ${subject}.
-Topic: "${topic}".
-Format output cleanly in HTML tags with:
-1. Header showing Subject, Level, and Topic.
-2. ${count} well-structured questions with multiple-choice choices (A, B, C, D) or short answer spaces.
-3. Full Marking Key guide at the end.`;
-
-            try {
-                const result = await callGroqAPI(prompt);
-                output.innerHTML = result;
-            } catch (err) {
-                output.innerHTML = `<div class="p-4 bg-red-100 text-red-700 text-xs rounded-xl">Error: ${err.message}</div>`;
-            }
-        }
-
-        async function generateLessonPlanWithGroq() {
-            const subject = document.getElementById('lpSubject').value || 'Integrated Science';
-            const obj = document.getElementById('lpObjective').value || 'Understand core syllabus objectives';
-            const output = document.getElementById('lpOutput');
-
-            output.innerHTML = `
-                <div class="text-center py-12 text-slate-600">
-                    <i class="fa-solid fa-bolt text-amber-500 text-3xl animate-bounce mb-3"></i>
-                    <p class="font-bold text-xs">Generating 40-Minute Lesson Plan via Groq AI...</p>
-                </div>
-            `;
-
-            const prompt = `Generate a detailed 40-minute lesson plan for subject "${subject}" with learning objective: "${obj}".
-Include:
-- Introduction (5 mins)
-- Teacher Explanation & Guided Practice (25 mins)
-- Student Task / Evaluation (10 mins)
-Format output cleanly using HTML tags.`;
-
-            try {
-                const result = await callGroqAPI(prompt);
-                output.innerHTML = result;
-            } catch (err) {
-                output.innerHTML = `<div class="p-4 bg-red-100 text-red-700 text-xs rounded-xl">Error: ${err.message}</div>`;
-            }
-        }
-
-        async function generateReportWithGroq() {
-            const name = document.getElementById('repName').value || 'The Student';
-            const gender = document.getElementById('repGender').value;
-            const notes = document.getElementById('repNotes').value || 'Good performance and punctual';
-            const output = document.getElementById('repOutput');
-
-            output.innerHTML = `<p class="text-center py-8 text-xs text-slate-500">Generating report remarks...</p>`;
-
-            const prompt = `Generate constructive end-of-term student report remarks for a ${gender} named "${name}".
-Performance Notes: "${notes}".
-Provide two paragraphs:
-1. English report remark.
-2. Accurate Setswana translation/adapted remark.`;
-
-            try {
-                const result = await callGroqAPI(prompt);
-                output.innerHTML = result;
-            } catch (err) {
-                output.innerHTML = `<div class="p-4 bg-red-100 text-red-700 text-xs rounded-xl">Error: ${err.message}</div>`;
-            }
-        }
-
-        function openAcademyModule(modKey) {
-            const container = document.getElementById('academyModuleContainer');
-            const title = document.getElementById('academyModuleTitle');
-            const body = document.getElementById('academyModuleBody');
-
-            container.classList.remove('hidden');
-
-            if (modKey === 'bec') {
-                title.innerText = 'BEC Objective Assessment Construction';
-                body.innerHTML = `
-                    <p class="mb-3">This module provides guidelines for constructing balanced assessment items aligned with BEC standards.</p>
-                    <ul class="list-disc pl-5 space-y-1 mb-3">
-                        <li>Ensure stems are clear and free of clue phrasing.</li>
-                        <li>Maintain balanced difficulty levels across lower and higher-order cognitive domains.</li>
-                    </ul>
-                `;
-            } else if (modKey === 'digital') {
-                title.innerText = 'Digital Pedagogy & Blended Learning';
-                body.innerHTML = `
-                    <p class="mb-3">Learn how to integrate digital resources into offline and low-bandwidth school settings.</p>
-                `;
-            } else {
-                title.innerText = 'Mixed-Ability Classroom Management';
-                body.innerHTML = `
-                    <p class="mb-3">Practical methods for managing diverse learning speeds within large classrooms.</p>
-                `;
-            }
-        }
-
-        function closeAcademyModule() {
-            document.getElementById('academyModuleContainer').classList.add('hidden');
-        }
-
-        function summarizeGlobalTech(topic) {
-            const detail = document.getElementById('radarDetail');
-            const title = document.getElementById('radarTitle');
-            const content = document.getElementById('radarContent');
-
-            title.innerText = `Global Insight: ${topic}`;
-            content.innerText = `Detailed Overview: ${topic} represents a key global trend in modern education technology.`;
-            detail.classList.remove('hidden');
-        }
-
-        function exportToPDF(elementId, filename) {
-            const element = document.getElementById(elementId);
-            html2pdf().from(element).save(`${filename}.pdf`);
         }
     </script>
 </body>
