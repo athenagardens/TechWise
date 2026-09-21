@@ -35,7 +35,7 @@
         </button>
     </div>
 
-    <!-- Header / Navbar -->
+    <!-- Header / Navbar with CPD Point Tracker -->
     <header class="border-b border-slate-200 bg-white px-6 py-4 flex flex-wrap justify-between items-center gap-4 shadow-sm">
         <div class="flex items-center space-x-3">
             <div class="bg-black text-white p-2.5 rounded-xl font-black text-xl flex items-center justify-center w-10 h-10 border-2 border-bwBlue">
@@ -50,13 +50,24 @@
             </div>
         </div>
 
-        <button onclick="toggleKeyModal()" class="bg-slate-900 hover:bg-black text-white border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition shadow">
-            <i class="fa-solid fa-bolt text-bwBlue"></i>
-            <span>Groq AI Settings</span>
-        </button>
+        <div class="flex items-center space-x-3">
+            <!-- BOTEPCO CPD Points Badge -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-right flex items-center space-x-3">
+                <div class="text-xs">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase">BOTEPCO CPD Points</div>
+                    <div class="font-black text-slate-900 text-sm"><span id="cpdCounter">12.5</span> / 50.0 pts</div>
+                </div>
+                <i class="fa-solid fa-award text-amber-500 text-xl"></i>
+            </div>
+
+            <button onclick="toggleKeyModal()" class="bg-slate-900 hover:bg-black text-white border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition shadow">
+                <i class="fa-solid fa-bolt text-bwBlue"></i>
+                <span>Groq AI Settings</span>
+            </button>
+        </div>
     </header>
 
-    <!-- Main Navigation Tabs (5 Tabs including Futuristic Dev) -->
+    <!-- Main Navigation Tabs -->
     <div class="px-6 pt-6">
         <div class="grid grid-cols-2 md:grid-cols-5 gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
             <button id="tab-exam" onclick="switchTab('exam')" class="tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition">
@@ -191,26 +202,37 @@
                 </button>
             </div>
 
-            <!-- 4. TEACHER ACADEMY FORM -->
+            <!-- 4. TEACHER ACADEMY FORM (WITH CPD TRAIN & EARN & DIRECTORY BUTTON) -->
             <div id="form-academy" class="tool-form hidden space-y-5">
                 <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
                     <span class="w-2 h-2 rounded-full bg-bwBlue"></span>
-                    <span>Teacher Academy</span>
+                    <span>Teacher Academy (BOTEPCO CPD Accredited)</span>
                 </h2>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-award text-amber-600 text-lg"></i>
+                    <span>Earn <strong>2.5 CPD Credit Points</strong> per completed module assessment!</span>
+                </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">PD Module</label>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Select Accredited Training Course</label>
                     <select id="academyTopic" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
-                        <option value="School Tech & Futuristic Development (EdTech Trends)">School Tech & Futuristic Development (EdTech Trends)</option>
-                        <option value="Inclusive Classroom Strategies">Inclusive Classroom Strategies</option>
-                        <option value="Integrating AI in Secondary Education">Integrating AI in Secondary Education</option>
-                        <option value="BEC Examination Preparation Techniques">BEC Examination Preparation Techniques</option>
-                        <option value="Classroom Management & Engagement">Classroom Management & Engagement</option>
+                        <option value="Inclusive Classroom Strategies">Inclusive Classroom Strategies (2.5 CPD Pts)</option>
+                        <option value="Integrating AI in Secondary Education">Integrating AI in Secondary Education (2.5 CPD Pts)</option>
+                        <option value="BEC Examination Preparation Techniques">BEC Examination Preparation Techniques (2.5 CPD Pts)</option>
+                        <option value="Classroom Management & Engagement">Classroom Management & Engagement (2.5 CPD Pts)</option>
                     </select>
                 </div>
                 <button onclick="generateAIContent('academy')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
-                    <i class="fa-solid fa-bolt text-bwBlue"></i>
-                    <span>Generate Training Summary</span>
+                    <i class="fa-solid fa-graduation-cap text-bwBlue"></i>
+                    <span>Start CPD Course & Quiz</span>
                 </button>
+
+                <!-- Free Apps Directory Quick Link -->
+                <div class="pt-2 border-t border-slate-100">
+                    <button onclick="showAppDirectory()" class="w-full bg-sky-50 border border-bwBlue text-slate-900 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 hover:bg-sky-100 transition">
+                        <i class="fa-solid fa-cubes text-bwBlue"></i>
+                        <span>Explore Free Teaching Apps & Self-Learning Platforms</span>
+                    </button>
+                </div>
             </div>
 
             <!-- 5. FUTURISTIC DEVELOPMENT FORM -->
@@ -220,7 +242,7 @@
                     <span>Futuristic Dev & Tech Radar</span>
                 </h2>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                    Keep your teaching skills ahead of the curve. Explore real-time briefings on cutting-edge classroom technologies, emerging AI tools, and global EdTech updates.
+                    Keep your teaching skills ahead of the curve. Complete tech radar modules or explore curated free self-learning software.
                 </p>
                 <div>
                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Focus Technology Trend</label>
@@ -233,8 +255,16 @@
                 </div>
                 <button onclick="generateAIContent('futuristic')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
                     <i class="fa-solid fa-compass text-bwBlue"></i>
-                    <span>Get Tech Trend Briefing</span>
+                    <span>Start Tech Radar Assessment (2.5 Pts)</span>
                 </button>
+
+                <!-- Free Apps Directory Quick Link -->
+                <div class="pt-2 border-t border-slate-100">
+                    <button onclick="showAppDirectory()" class="w-full bg-sky-50 border border-bwBlue text-slate-900 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 hover:bg-sky-100 transition">
+                        <i class="fa-solid fa-cubes text-bwBlue"></i>
+                        <span>Browse Free EdTech Directory</span>
+                    </button>
+                </div>
             </div>
 
         </div>
@@ -275,6 +305,171 @@
 
     <!-- Application JavaScript -->
     <script>
+        let currentCPDPoints = 12.5;
+
+        // Add Points Handler
+        function claimCPDPoints(courseName) {
+            currentCPDPoints += 2.5;
+            document.getElementById('cpdCounter').innerText = currentCPDPoints.toFixed(1);
+            
+            const printContent = `
+                <div class="border-4 border-slate-900 p-6 rounded-2xl bg-gradient-to-b from-sky-50 to-white text-center space-y-4 shadow-xl">
+                    <div class="flex justify-center items-center space-x-2 text-bwBlue">
+                        <i class="fa-solid fa-award text-4xl"></i>
+                    </div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-widest">Certificate of CPD Achievement</h2>
+                    <p class="text-xs text-slate-600">Botswana Teaching Professionals Council (BOTEPCO) Aligned Framework</p>
+                    <div class="py-4 border-y border-slate-200 my-2">
+                        <p class="text-xs text-slate-500 uppercase">This certifies that the educator has successfully completed</p>
+                        <h3 class="text-base font-bold text-slate-900 mt-1">${courseName}</h3>
+                        <div class="inline-block bg-bwBlue text-slate-950 font-bold px-3 py-1 rounded-full text-xs mt-3">
+                            +2.5 CPD Credit Points Awarded
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400">Total Accumulated CPD Balance: ${currentCPDPoints.toFixed(1)} / 50.0 Points</p>
+                    <button onclick="window.print()" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-print mr-2"></i>Print Official Certificate
+                    </button>
+                </div>
+            `;
+            document.getElementById('outputContainer').innerHTML = printContent;
+        }
+
+        // Claim Small CPD Point for exploring platforms
+        function claimExplorationCPD(appName) {
+            currentCPDPoints += 1.0;
+            document.getElementById('cpdCounter').innerText = currentCPDPoints.toFixed(1);
+            alert(`+1.0 CPD Point recorded for exploring: ${appName}`);
+        }
+
+        // Render Categorized Free App & Self-Teaching Directory
+        function showAppDirectory() {
+            document.getElementById('previewTitle').innerText = "Free Educational Apps & Self-Teaching Directory";
+            const html = `
+                <div class="space-y-6 text-xs">
+                    <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl text-slate-800 flex items-center justify-between">
+                        <span><i class="fa-solid fa-compass text-bwBlue mr-1.5"></i> Explore free tools to enhance teaching and self-guided professional learning.</span>
+                        <span class="text-[10px] bg-bwBlue text-slate-950 font-bold px-2 py-0.5 rounded-full">+1.0 CPD Point per Platform Launch</span>
+                    </div>
+
+                    <!-- Group 1: Self-Teaching & Coding Platforms -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 uppercase tracking-wider border-b pb-1 text-[11px] flex items-center space-x-2">
+                            <i class="fa-solid fa-code text-bwBlue"></i>
+                            <span>1. Self-Teaching, Coding & Professional Training</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Code.org</span>
+                                    <a href="https://code.org" target="_blank" onclick="claimExplorationCPD('Code.org')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Free self-paced computer science courses, block coding tutorials, and CS curricula for all grade levels.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Khan Academy & Khanmigo</span>
+                                    <a href="https://www.khanacademy.org" target="_blank" onclick="claimExplorationCPD('Khan Academy')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Comprehensive free video courses, practice exercises, and self-learning pathways in Math, Science, and Computing.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Google Educator Center</span>
+                                    <a href="https://teachercenter.withgoogle.com" target="_blank" onclick="claimExplorationCPD('Google Teacher Center')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Free self-study training courses on Google Classroom, Workspace, and digital teaching certifications.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Microsoft Learn for Educators</span>
+                                    <a href="https://learn.microsoft.com/en-us/training/educator-center/" target="_blank" onclick="claimExplorationCPD('Microsoft Educator')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Free modular training pathways for teachers on digital literacy, AI tools, and classroom management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group 2: STEM, Virtual Labs & Simulations -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 uppercase tracking-wider border-b pb-1 text-[11px] flex items-center space-x-2">
+                            <i class="fa-solid fa-flask text-bwBlue"></i>
+                            <span>2. STEM & Interactive Virtual Simulations</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>PhET Interactive Simulations</span>
+                                    <a href="https://phet.colorado.edu" target="_blank" onclick="claimExplorationCPD('PhET Sims')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Free interactive science and math simulations (Physics, Chemistry, Biology) designed by the University of Colorado.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Scratch by MIT</span>
+                                    <a href="https://scratch.mit.edu" target="_blank" onclick="claimExplorationCPD('Scratch MIT')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Creative block-based coding environment where students build interactive games, animations, and stories.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Tinkercad</span>
+                                    <a href="https://www.tinkercad.com" target="_blank" onclick="claimExplorationCPD('Tinkercad')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Free browser-based app for 3D design, electronics prototyping, and virtual circuit simulation.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>GeoGebra</span>
+                                    <a href="https://www.geogebra.org" target="_blank" onclick="claimExplorationCPD('GeoGebra')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Dynamic math software for learning and teaching geometry, algebra, spreadsheets, graphing, and statistics.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group 3: Interactive Classrooms & Gamified Learning -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-slate-900 uppercase tracking-wider border-b pb-1 text-[11px] flex items-center space-x-2">
+                            <i class="fa-solid fa-gamepad text-bwBlue"></i>
+                            <span>3. Gamified Learning & Student Engagement</span>
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Kahoot! (Free Teacher Plan)</span>
+                                    <a href="https://kahoot.com" target="_blank" onclick="claimExplorationCPD('Kahoot')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Game-based learning platform for hosting live quizzes, reviews, and interactive classroom competitions.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Quizizz</span>
+                                    <a href="https://quizizz.com" target="_blank" onclick="claimExplorationCPD('Quizizz')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Self-paced learning platform with free pre-made quiz banks and real-time student performance tracking.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Padlet</span>
+                                    <a href="https://padlet.com" target="_blank" onclick="claimExplorationCPD('Padlet')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">Collaborative digital bulletin board for brainstorming, submitting homework, and sharing media.</p>
+                            </div>
+                            <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+                                <div class="font-bold text-slate-900 flex justify-between items-center">
+                                    <span>Canva for Education</span>
+                                    <a href="https://www.canva.com/education/" target="_blank" onclick="claimExplorationCPD('Canva Education')" class="text-bwBlue hover:underline text-[10px] font-bold">Visit Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                                </div>
+                                <p class="text-slate-600 text-[11px]">100% free premium visual suite for teachers to design posters, presentations, and lesson worksheets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('outputContainer').innerHTML = html;
+        }
+
         // Modal Controls
         function toggleKeyModal() {
             const modal = document.getElementById('keyModal');
@@ -304,7 +499,7 @@
                 exam: 'Exam Generator Preview',
                 lesson: 'Lesson Planner Preview',
                 report: 'Report Writer Preview',
-                academy: 'Teacher Academy Preview',
+                academy: 'Teacher Academy & CPD Learning Center',
                 futuristic: 'Futuristic Development Radar'
             };
 
@@ -336,13 +531,13 @@
             output.innerHTML = `
                 <div class="text-center py-12 text-slate-600">
                     <i class="fa-solid fa-bolt text-bwBlue text-3xl animate-bounce mb-3"></i>
-                    <p class="font-bold text-xs text-slate-700">Generating Content with AI...</p>
+                    <p class="font-bold text-xs text-slate-700">Generating Training Module with AI...</p>
                 </div>
             `;
 
             const apiKey = localStorage.getItem('groq_api_key') || (document.getElementById('groqApiKey') ? document.getElementById('groqApiKey').value.trim() : '');
 
-            // Fallback to Demo Mode if no key exists
+            // Fallback to Interactive Demo Training if no key exists
             if (!apiKey) {
                 setTimeout(() => {
                     output.innerHTML = renderDemoContent(toolType);
@@ -350,7 +545,7 @@
                 return;
             }
 
-            // Generate Prompt based on Tool Type
+            // Generate Prompts
             let prompt = "";
             if (toolType === 'exam') {
                 const subject = document.getElementById('quizSubject').value;
@@ -371,13 +566,12 @@
                 prompt = `Write a professional 2-paragraph school report card remark for a student named ${name} who received ${grade}. Notes: ${notes}. Include positive encouragement and next steps. Format with clean HTML.`;
             } else if (toolType === 'academy') {
                 const module = document.getElementById('academyTopic').value;
-                prompt = `Write a 3-point Professional Development learning guide for Botswana teachers on the topic: "${module}". Include actionable classroom strategies. Format with clean HTML.`;
+                prompt = `Write a concise 3-point Professional Development training lesson for Botswana teachers on: "${module}". At the end, include a 1-question multiple choice question. Format with clean HTML. Include a button '<button onclick="claimCPDPoints(\'${module}\')" class="mt-4 bg-bwBlue text-slate-950 font-bold px-4 py-2 rounded-xl text-xs">Submit Answer & Claim 2.5 CPD Points</button>'`;
             } else if (toolType === 'futuristic') {
                 const focus = document.getElementById('futuristicFocus').value;
-                prompt = `Provide a futuristic technology briefing for teachers in Botswana on: "${focus}". Highlight 3 practical school tools, key trends, and steps teachers can take today to stay ahead. Format with clean HTML.`;
+                prompt = `Provide a tech radar briefing on: "${focus}". Include 3 innovations and 1 multiple choice question for practical classroom deployment. Format with clean HTML. Include a button '<button onclick="claimCPDPoints(\'${focus}\')" class="mt-4 bg-bwBlue text-slate-950 font-bold px-4 py-2 rounded-xl text-xs">Complete Module & Claim 2.5 CPD Points</button>'`;
             }
 
-            // Live API Execution
             try {
                 const result = await callGroqAPI(prompt, apiKey);
                 output.innerHTML = result;
@@ -431,12 +625,15 @@
             throw new Error(lastError || "Could not reach active Groq models.");
         }
 
-        // Demo Mode Previews
+        // Interactive Demo Mode Previews with Point Claims
         function renderDemoContent(toolType) {
-            const demoHeader = `<div class="p-3 bg-sky-50 border border-sky-200 text-slate-800 rounded-xl text-xs mb-4 flex items-center space-x-2"><i class="fa-solid fa-circle-info text-bwBlue"></i><span><strong>Demo Mode:</strong> Add a Groq API Key via "Groq AI Settings" for live AI generation.</span></div>`;
+            const demoHeader = `<div class="p-3 bg-sky-50 border border-sky-200 text-slate-800 rounded-xl text-xs mb-4 flex items-center justify-between">
+                <span><i class="fa-solid fa-award text-amber-500 mr-1"></i><strong>CPD Self-Study Training Mode Active</strong></span>
+                <span class="text-[10px] bg-bwBlue px-2 py-0.5 rounded font-bold">+2.5 Points</span>
+            </div>`;
             
             if (toolType === 'exam') {
-                return demoHeader + `
+                return `
                     <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Integrated Science Assessment Paper</h2>
                     <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-800">
                         <li>What is the primary function of ecosystem processes in local environments?
@@ -445,7 +642,7 @@
                     </ol>
                 `;
             } else if (toolType === 'lesson') {
-                return demoHeader + `
+                return `
                     <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Lesson Plan: Governance & Democracy</h2>
                     <div class="space-y-3 text-xs text-slate-800">
                         <p><strong>Objectives:</strong> Students will understand democratic principles within Botswana's local government structure.</p>
@@ -453,25 +650,42 @@
                     </div>
                 `;
             } else if (toolType === 'report') {
-                return demoHeader + `
+                return `
                     <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Student Performance Remarks</h2>
                     <p class="text-xs text-slate-700 leading-relaxed">Kabelo has demonstrated excellent dedication this term. Active involvement during practical group assignments shows strong leadership and problem-solving skills.</p>
                 `;
             } else if (toolType === 'academy') {
+                const topicName = document.getElementById('academyTopic').value;
                 return demoHeader + `
-                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Teacher PD Module: Inclusive Classrooms</h2>
-                    <ul class="list-disc pl-5 space-y-2 text-xs text-slate-700">
-                        <li>Implement peer-assisted learning pairs to accommodate diverse learning paces.</li>
-                        <li>Use multi-modal instructional formats combining visual summaries with verbal instructions.</li>
-                    </ul>
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">CPD Training Module: ${topicName}</h2>
+                    <div class="space-y-3 text-xs text-slate-700">
+                        <p><strong>Key Concept:</strong> Continuous assessment paired with structured feedback empowers student mastery in mixed-ability classrooms.</p>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2 mt-4">
+                            <p class="font-bold text-slate-900">Knowledge Check:</p>
+                            <p>Which method best supports inclusive participation during daily review?</p>
+                            <label class="block"><input type="radio" name="q1" class="mr-2"> Structured peer pairing and randomized response checks</label>
+                            <label class="block"><input type="radio" name="q1" class="mr-2"> Calling only on student volunteers</label>
+                            <button onclick="claimCPDPoints('${topicName}')" class="mt-3 bg-bwBlue hover:bg-bwBlueHover text-slate-950 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow">
+                                Submit & Claim 2.5 CPD Points
+                            </button>
+                        </div>
+                    </div>
                 `;
             } else if (toolType === 'futuristic') {
+                const trendName = document.getElementById('futuristicFocus').value;
                 return demoHeader + `
-                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Futuristic Dev: Generative AI & EdTech Radar</h2>
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Tech Radar Briefing: ${trendName}</h2>
                     <div class="space-y-3 text-xs text-slate-700">
-                        <p><strong>1. Automated Formative Feedback:</strong> AI tools that evaluate math steps line-by-line in real time.</p>
-                        <p><strong>2. Multimodal Lesson Assistants:</strong> Transforming simple text prompts into diagram-rich lesson notes instantly.</p>
-                        <p><strong>3. Low-Bandwidth Offline Models:</strong> Localized AI assistants running on basic laptop hardware without active internet connection.</p>
+                        <p><strong>Summary:</strong> Localized offline digital engines allow secondary schools to access smart educational resources without internet dependency.</p>
+                        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2 mt-4">
+                            <p class="font-bold text-slate-900">Module Verification:</p>
+                            <p>What is the primary benefit of offline-capable digital learning suites in regional schools?</p>
+                            <label class="block"><input type="radio" name="q2" class="mr-2"> Uninterrupted educational delivery regardless of bandwidth limits</label>
+                            <label class="block"><input type="radio" name="q2" class="mr-2"> Complete elimination of printed syllabi</label>
+                            <button onclick="claimCPDPoints('${trendName}')" class="mt-3 bg-bwBlue hover:bg-bwBlueHover text-slate-950 font-black px-4 py-2 rounded-xl text-xs uppercase tracking-wider shadow">
+                                Complete & Claim 2.5 CPD Points
+                            </button>
+                        </div>
                     </div>
                 `;
             }
