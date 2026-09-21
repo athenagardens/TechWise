@@ -24,7 +24,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
 
-    <!-- Top Notification Banner (Sky Blue Accent) -->
+    <!-- Top Notification Banner -->
     <div class="bg-bwBlue text-slate-950 px-4 py-2 text-xs font-bold flex justify-between items-center shadow-sm">
         <div class="flex items-center space-x-2 mx-auto">
             <i class="fa-solid fa-rotate-left text-slate-950"></i>
@@ -56,24 +56,28 @@
         </button>
     </header>
 
-    <!-- Main Navigation Tabs -->
+    <!-- Main Navigation Tabs (5 Tabs including Futuristic Dev) -->
     <div class="px-6 pt-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
-            <button id="tab-exam" onclick="switchTab('exam')" class="tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
+            <button id="tab-exam" onclick="switchTab('exam')" class="tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition">
                 <i class="fa-solid fa-file-pen"></i>
                 <span>Exam Generator</span>
             </button>
-            <button id="tab-lesson" onclick="switchTab('lesson')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-lesson" onclick="switchTab('lesson')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-regular fa-calendar-check"></i>
                 <span>Lesson Planner</span>
             </button>
-            <button id="tab-report" onclick="switchTab('report')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-report" onclick="switchTab('report')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-solid fa-user-pen"></i>
                 <span>Report Writer</span>
             </button>
-            <button id="tab-academy" onclick="switchTab('academy')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-academy" onclick="switchTab('academy')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-solid fa-book-open"></i>
                 <span>Teacher Academy</span>
+            </button>
+            <button id="tab-futuristic" onclick="switchTab('futuristic')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+                <i class="fa-solid fa-rocket text-bwBlue"></i>
+                <span>Futuristic Dev</span>
             </button>
         </div>
     </div>
@@ -196,6 +200,7 @@
                 <div>
                     <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">PD Module</label>
                     <select id="academyTopic" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="School Tech & Futuristic Development (EdTech Trends)">School Tech & Futuristic Development (EdTech Trends)</option>
                         <option value="Inclusive Classroom Strategies">Inclusive Classroom Strategies</option>
                         <option value="Integrating AI in Secondary Education">Integrating AI in Secondary Education</option>
                         <option value="BEC Examination Preparation Techniques">BEC Examination Preparation Techniques</option>
@@ -205,6 +210,30 @@
                 <button onclick="generateAIContent('academy')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
                     <i class="fa-solid fa-bolt text-bwBlue"></i>
                     <span>Generate Training Summary</span>
+                </button>
+            </div>
+
+            <!-- 5. FUTURISTIC DEVELOPMENT FORM -->
+            <div id="form-futuristic" class="tool-form hidden space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
+                    <i class="fa-solid fa-rocket text-bwBlue"></i>
+                    <span>Futuristic Dev & Tech Radar</span>
+                </h2>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Keep your teaching skills ahead of the curve. Explore real-time briefings on cutting-edge classroom technologies, emerging AI tools, and global EdTech updates.
+                </p>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Focus Technology Trend</label>
+                    <select id="futuristicFocus" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="Generative AI & LLMs in African Education">Generative AI & LLMs in African Education</option>
+                        <option value="Gamified Assessment & Interactive Classrooms">Gamified Assessment & Interactive Classrooms</option>
+                        <option value="Digital Literacy & Smart School Management Systems">Digital Literacy & Smart School Management Systems</option>
+                        <option value="Next-Gen STEM Tools & Virtual Labs">Next-Gen STEM Tools & Virtual Labs</option>
+                    </select>
+                </div>
+                <button onclick="generateAIContent('futuristic')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
+                    <i class="fa-solid fa-compass text-bwBlue"></i>
+                    <span>Get Tech Trend Briefing</span>
                 </button>
             </div>
 
@@ -270,12 +299,13 @@
 
         // Tab Switching Logic
         function switchTab(activeTab) {
-            const tabs = ['exam', 'lesson', 'report', 'academy'];
+            const tabs = ['exam', 'lesson', 'report', 'academy', 'futuristic'];
             const titles = {
                 exam: 'Exam Generator Preview',
                 lesson: 'Lesson Planner Preview',
                 report: 'Report Writer Preview',
-                academy: 'Teacher Academy Preview'
+                academy: 'Teacher Academy Preview',
+                futuristic: 'Futuristic Development Radar'
             };
 
             tabs.forEach(tab => {
@@ -283,10 +313,10 @@
                 const form = document.getElementById(`form-${tab}`);
 
                 if (tab === activeTab) {
-                    btn.className = "tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition";
+                    btn.className = "tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition";
                     form.classList.remove('hidden');
                 } else {
-                    btn.className = "tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition";
+                    btn.className = "tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center space-x-2 transition";
                     form.classList.add('hidden');
                 }
             });
@@ -342,6 +372,9 @@
             } else if (toolType === 'academy') {
                 const module = document.getElementById('academyTopic').value;
                 prompt = `Write a 3-point Professional Development learning guide for Botswana teachers on the topic: "${module}". Include actionable classroom strategies. Format with clean HTML.`;
+            } else if (toolType === 'futuristic') {
+                const focus = document.getElementById('futuristicFocus').value;
+                prompt = `Provide a futuristic technology briefing for teachers in Botswana on: "${focus}". Highlight 3 practical school tools, key trends, and steps teachers can take today to stay ahead. Format with clean HTML.`;
             }
 
             // Live API Execution
@@ -361,9 +394,9 @@
         // Groq API Execution
         async function callGroqAPI(prompt, apiKey) {
             const modelsToTry = [
-                'openai/gpt-oss-20b',
-                'llama-3.1-8b-instant',
                 'llama-3.3-70b-versatile',
+                'llama-3.1-8b-instant',
+                'openai/gpt-oss-20b',
                 'mixtral-8x7b-32768'
             ];
 
@@ -431,6 +464,15 @@
                         <li>Implement peer-assisted learning pairs to accommodate diverse learning paces.</li>
                         <li>Use multi-modal instructional formats combining visual summaries with verbal instructions.</li>
                     </ul>
+                `;
+            } else if (toolType === 'futuristic') {
+                return demoHeader + `
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Futuristic Dev: Generative AI & EdTech Radar</h2>
+                    <div class="space-y-3 text-xs text-slate-700">
+                        <p><strong>1. Automated Formative Feedback:</strong> AI tools that evaluate math steps line-by-line in real time.</p>
+                        <p><strong>2. Multimodal Lesson Assistants:</strong> Transforming simple text prompts into diagram-rich lesson notes instantly.</p>
+                        <p><strong>3. Low-Bandwidth Offline Models:</strong> Localized AI assistants running on basic laptop hardware without active internet connection.</p>
+                    </div>
                 `;
             }
         }
