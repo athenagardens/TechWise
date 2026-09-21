@@ -3,107 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechWise Suite - Botswana Educator Platform</title>
+    <title>TechWise - Botswana Educator Workspace</title>
     
-    <!-- Dependencies: Tailwind CSS, FontAwesome, html2pdf, docx library -->
+    <!-- Dependencies: Tailwind CSS, FontAwesome, html2pdf -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .bg-bw-blue { background-color: #008751; } /* Local palette accent */
-        .text-bw-blue { color: #008751; }
-        .active-tab { border-bottom: 3px solid #008751; color: #008751; font-weight: 600; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; }
+        .active-tab { 
+            background-color: #0F172A !important; 
+            color: #FFFFFF !important; 
+            border-color: #0F172A !important;
+            font-weight: 700;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navbar -->
-    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Top Header -->
+    <header class="bg-slate-900 text-white shadow-md border-b border-amber-500/30 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3.5 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-emerald-600 text-white p-2 rounded-lg font-bold text-xl">
+                <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl font-black text-xl shadow-inner">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg leading-none">TechWise <span class="text-emerald-400 text-xs px-2 py-0.5 bg-emerald-950 rounded border border-emerald-700">BW Edition</span></h1>
-                    <p class="text-xs text-slate-400">Botswana Teacher Co-Pilot</p>
+                    <h1 class="font-extrabold text-xl tracking-tight text-white leading-none">
+                        TechWise <span class="text-amber-400 text-xs px-2 py-0.5 bg-slate-800 rounded-full font-semibold border border-amber-500/20">BW</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 mt-1 font-medium">Smart Assistant for Botswana Teachers</p>
                 </div>
             </div>
 
-            <!-- User Auth & Status Bar -->
-            <div id="authStatusArea" class="flex items-center space-x-4">
-                <div id="userInfo" class="hidden sm:flex flex-col text-right">
-                    <span id="userDisplayName" class="text-sm font-semibold">Dumela, Teacher</span>
-                    <span id="userSubscriptionStatus" class="text-xs text-emerald-400 font-medium">Free Trial (3 Credits Left)</span>
-                </div>
-                <button id="adminPortalBtn" onclick="toggleAdminModal()" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 px-3 py-2 rounded-lg border border-slate-700">
-                    <i class="fa-solid fa-user-shield mr-1"></i> Admin Portal
+            <!-- Login / Upgrade Buttons -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openPaymentModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-lg shadow-sm transition">
+                    <i class="fa-solid fa-crown mr-1"></i> Go Pro (BWP 99)
                 </button>
-                <button id="authActionBtn" onclick="openAuthModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2 rounded-lg transition">
-                    Login / Register
+                <button onclick="openAuthModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3 py-2 rounded-lg border border-slate-700 transition">
+                    <i class="fa-solid fa-user mr-1"></i> Account
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Hub -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
+    <!-- Main Simplified Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
 
-        <!-- Banner / Disclaimer -->
-        <div class="bg-blue-50 border-l-4 border-emerald-600 p-4 mb-6 rounded-r-lg shadow-sm flex justify-between items-center">
-            <div class="flex items-start space-x-3">
-                <i class="fa-solid fa-circle-info text-emerald-600 mt-1"></i>
-                <div>
-                    <h2 class="font-semibold text-sm text-slate-900">Aligned with Ministry of Education & Skills Development (MoESD) Guidelines</h2>
-                    <p class="text-xs text-slate-600 mt-0.5">Generate PSLE, JCE, and BGCSE assessment papers, schemes of work, and performance reports localized for Botswana classrooms.</p>
-                </div>
+        <!-- Minimal Local Alignment Banner -->
+        <div class="bg-slate-900 text-slate-200 p-3.5 mb-6 rounded-xl shadow-sm border border-slate-800 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-amber-500/10 text-amber-400 p-1.5 rounded-lg text-sm">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </span>
+                <p class="text-xs font-medium">
+                    Designed for the Botswana Education System <span class="text-slate-400">(PSLE, JCE & BGCSE Curriculum Framework)</span>
+                </p>
             </div>
-            <button onclick="openPaymentModal()" class="hidden sm:block bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold text-xs px-3 py-2 rounded shadow transition">
-                <i class="fa-solid fa-crown mr-1"></i> Upgrade (BWP 99/mo)
+            <span class="hidden sm:inline-block text-[11px] font-semibold text-amber-400 bg-amber-950/50 px-2.5 py-1 rounded-full border border-amber-800/40">
+                3 Free Credits Left
+            </span>
+        </div>
+
+        <!-- POPPING SECTION HEADER -->
+        <div class="mb-5">
+            <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center">
+                <span class="inline-block w-2 h-7 bg-amber-500 rounded-full mr-3"></span>
+                Select What You Want to Create Today
+            </h2>
+            <p class="text-xs text-slate-500 mt-1 ml-5">Choose one tool below to start generating instantly.</p>
+        </div>
+
+        <!-- Clear, Non-Overwhelming Tool Selector -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6">
+            <button onclick="switchTab('quizGen')" id="tab-quizGen" class="active-tab p-3.5 rounded-xl border-2 border-slate-200 text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm">
+                <i class="fa-solid fa-file-pen text-amber-500"></i>
+                <span>1. Exam / Quiz Generator</span>
+            </button>
+            <button onclick="switchTab('lessonPlan')" id="tab-lessonPlan" class="p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
+                <i class="fa-solid fa-calendar-check text-slate-400"></i>
+                <span>2. Lesson Planner</span>
+            </button>
+            <button onclick="switchTab('studentReport')" id="tab-studentReport" class="p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
+                <i class="fa-solid fa-user-check text-slate-400"></i>
+                <span>3. Student Report Writer</span>
             </button>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="border-b border-slate-200 mb-6 overflow-x-auto">
-            <nav class="flex space-x-8 min-w-max" id="toolTabs">
-                <button onclick="switchTab('quizGen')" id="tab-quizGen" class="active-tab py-3 px-1 text-sm font-medium flex items-center space-x-2">
-                    <i class="fa-solid fa-file-pen"></i> <span>Exam & Quiz Generator</span>
-                </button>
-                <button onclick="switchTab('lessonPlan')" id="tab-lessonPlan" class="py-3 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center space-x-2">
-                    <i class="fa-solid fa-calendar-check"></i> <span>30-Sec Lesson Planner</span>
-                </button>
-                <button onclick="switchTab('studentReport')" id="tab-studentReport" class="py-3 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center space-x-2">
-                    <i class="fa-solid fa-user-check"></i> <span>Report Writer</span>
-                </button>
-                <button onclick="switchTab('contextStory')" id="tab-contextStory" class="py-3 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center space-x-2">
-                    <i class="fa-solid fa-book-open"></i> <span>Local Story Builder</span>
-                </button>
-                <button onclick="switchTab('teacherAcademy')" id="tab-teacherAcademy" class="py-3 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 flex items-center space-x-2 text-emerald-600">
-                    <i class="fa-solid fa-award"></i> <span>Teacher Academy (CPD)</span>
-                </button>
-            </nav>
-        </div>
-
-        <!-- TAB CONTENT 1: EXAM & QUIZ GENERATOR -->
+        <!-- TOOL 1: EXAM & QUIZ GENERATOR -->
         <section id="quizGen-content" class="tab-panel">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Form Settings -->
-                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="font-bold text-slate-900 border-b pb-2 flex justify-between items-center">
-                        <span>Test Parameters</span>
-                        <span class="text-xs font-normal text-slate-500">Form 1 - BGCSE</span>
-                    </h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Input Form -->
+                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Test Settings</h3>
+                        <p class="text-xs text-slate-400">Configure parameters for your exam paper</p>
+                    </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Select Subject</label>
-                        <select id="quizSubject" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500">
-                            <option value="Science">Integrated Science</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject</label>
+                        <select id="quizSubject" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                            <option value="Integrated Science">Integrated Science</option>
                             <option value="Mathematics">Mathematics</option>
-                            <option value="English">English Language</option>
+                            <option value="English Language">English Language</option>
                             <option value="Social Studies">Social Studies</option>
                             <option value="Setswana">Setswana</option>
                             <option value="Agriculture">Agriculture</option>
@@ -112,52 +117,47 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Target Level</label>
-                        <select id="quizLevel" class="w-full text-sm border border-slate-300 rounded-lg p-2.5 focus:ring-emerald-500 focus:border-emerald-500">
-                            <option value="PSLE (Standard 7)">PSLE (Standard 5-7)</option>
-                            <option value="JCE (Form 1-3)">JCE (Form 1-3)</option>
-                            <option value="BGCSE (Form 4-5)">BGCSE (Form 4-5)</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Level</label>
+                        <select id="quizLevel" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                            <option value="PSLE (Standard 5-7)">PSLE (Standard 5 - 7)</option>
+                            <option value="JCE (Form 1-3)">JCE (Form 1 - 3)</option>
+                            <option value="BGCSE (Form 4-5)">BGCSE (Form 4 - 5)</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Syllabus Topic</label>
-                        <input type="text" id="quizTopic" placeholder="e.g. Ecosystems in Okavango, Fractions, Mining in Letlhakane" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Topic</label>
+                        <input type="text" id="quizTopic" placeholder="e.g. Ecosystems in Okavango, Fractions" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Number of Questions</label>
-                        <select id="quizCount" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
-                            <option value="5">5 Questions (Quick Quiz)</option>
-                            <option value="10" selected>10 Questions (Mid-Term Test)</option>
-                            <option value="15">15 Questions (End of Term Paper)</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Questions</label>
+                        <select id="quizCount" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                            <option value="5">5 Questions (Short Quiz)</option>
+                            <option value="10" selected>10 Questions (Standard Test)</option>
                         </select>
                     </div>
 
-                    <button onclick="generateAssessment()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-sm shadow transition flex justify-center items-center space-x-2">
+                    <button onclick="generateAssessment()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition flex justify-center items-center space-x-2">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Generate Exam & Marking Key</span>
+                        <span>Generate Exam Paper</span>
                     </button>
                 </div>
 
-                <!-- Preview Area -->
-                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <!-- Right Output Display -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center border-b pb-3 mb-4">
-                            <div class="flex space-x-2">
-                                <button id="btnPaper" onclick="togglePaperView('paper')" class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded">Student Test Paper</button>
-                                <button id="btnKey" onclick="togglePaperView('key')" class="text-xs font-semibold bg-slate-100 text-slate-600 px-3 py-1.5 rounded">Marking Scheme</button>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button onclick="exportToWord('quizOutput', 'TechWise_Exam')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded border border-slate-300"><i class="fa-solid fa-file-word text-blue-600 mr-1"></i> Word (.docx)</button>
-                                <button onclick="exportToPDF('quizOutput', 'TechWise_Exam')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded border border-slate-300"><i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> PDF / Print</button>
-                            </div>
+                            <h3 class="font-extrabold text-sm text-slate-900 uppercase">Document Preview</h3>
+                            <button onclick="exportToPDF('quizOutput', 'TechWise_Test')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
+                                <i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> Print / PDF
+                            </button>
                         </div>
 
-                        <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[350px]">
+                        <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[300px]">
                             <div class="text-center text-slate-400 py-16">
-                                <i class="fa-solid fa-file-signature text-4xl mb-3"></i>
-                                <p>Select your topic parameters on the left and click "Generate Exam" to build a MoESD-aligned test paper.</p>
+                                <i class="fa-solid fa-file-circle-plus text-5xl mb-3 text-slate-300"></i>
+                                <p class="text-xs font-medium">Fill in the settings on the left and click <strong>"Generate Exam Paper"</strong>.</p>
                             </div>
                         </div>
                     </div>
@@ -165,415 +165,228 @@
             </div>
         </section>
 
-        <!-- TAB CONTENT 2: LESSON PLANNER -->
+        <!-- TOOL 2: LESSON PLANNER -->
         <section id="lessonPlan-content" class="tab-panel hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="font-bold text-slate-900 border-b pb-2">Lesson Details</h3>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Subject & Grade</label>
-                        <input type="text" id="lpSubject" placeholder="e.g. Social Studies, Standard 6" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Lesson Details</h3>
+                        <p class="text-xs text-slate-400">Build a 40-minute structured plan</p>
                     </div>
+
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Lesson Duration</label>
-                        <select id="lpDuration" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
-                            <option value="40 minutes">Single Period (40 mins)</option>
-                            <option value="80 minutes">Double Period (80 mins)</option>
-                        </select>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject & Grade</label>
+                        <input type="text" id="lpSubject" placeholder="e.g. Social Studies, Form 2" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
                     </div>
+
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Main Objective</label>
-                        <textarea id="lpObjective" rows="3" placeholder="e.g. Students should be able to identify 3 causes of soil erosion in Botswana and propose conservation methods." class="w-full text-sm border border-slate-300 rounded-lg p-2.5"></textarea>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Main Learning Objective</label>
+                        <textarea id="lpObjective" rows="3" placeholder="e.g. Students will identify causes of soil erosion in Botswana and propose 2 conservation steps." class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none"></textarea>
                     </div>
-                    <button onclick="generateLessonPlan()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-sm shadow transition">
-                        Create Structured Plan
+
+                    <button onclick="generateLessonPlan()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
+                        Generate Lesson Plan
                     </button>
                 </div>
 
-                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h4 class="font-bold text-sm text-slate-800">Generated Lesson Structure</h4>
-                        <button onclick="exportToWord('lpOutput', 'Lesson_Plan')" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded border border-slate-300"><i class="fa-solid fa-file-word text-blue-600 mr-1"></i> Export to Word</button>
+                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Lesson Outline</h3>
                     </div>
-                    <div id="lpOutput" class="prose max-w-none text-slate-800 text-sm min-h-[350px]">
+                    <div id="lpOutput" class="prose max-w-none text-slate-800 text-sm min-h-[300px]">
                         <div class="text-center text-slate-400 py-16">
-                            <i class="fa-solid fa-calendar-day text-4xl mb-3"></i>
-                            <p>Fill in the objective on the left to generate a 6-stage structured lesson table.</p>
+                            <i class="fa-solid fa-calendar-day text-5xl mb-3 text-slate-300"></i>
+                            <p class="text-xs font-medium">Enter your lesson objective to create a structured timeline.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB CONTENT 3: REPORT WRITER -->
+        <!-- TOOL 3: REPORT WRITER -->
         <section id="studentReport-content" class="tab-panel hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="font-bold text-slate-900 border-b pb-2">Student Performance</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
+                    <div class="border-b border-slate-100 pb-3">
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Student Performance</h3>
+                        <p class="text-xs text-slate-400">Generate professional report card remarks</p>
+                    </div>
+
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Student Name & Gender</label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Student Name & Gender</label>
                         <div class="grid grid-cols-3 gap-2">
-                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm border border-slate-300 rounded-lg p-2.5">
-                            <select id="repGender" class="text-sm border border-slate-300 rounded-lg p-2.5">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                            <select id="repGender" class="text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                                <option value="Male">Boy</option>
+                                <option value="Female">Girl</option>
                             </select>
                         </div>
                     </div>
+
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Performance Observations (Bullet points)</label>
-                        <textarea id="repNotes" rows="4" placeholder="- Scored 78% in end of term test&#10;- Active in group discussions&#10;- Needs improvement in handwriting and attendance" class="w-full text-sm border border-slate-300 rounded-lg p-2.5"></textarea>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Quick Notes / Grade</label>
+                        <textarea id="repNotes" rows="3" placeholder="e.g. Scored 75% in term test, well behaved, needs better attendance" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none"></textarea>
                     </div>
-                    <button onclick="generateReport()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-sm shadow transition">
-                        Generate ~100-Word Review
+
+                    <button onclick="generateReport()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
+                        Generate Report Comment
                     </button>
                 </div>
 
-                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h4 class="font-bold text-sm text-slate-800">Official Report Entry</h4>
-                        <button onclick="navigator.clipboard.writeText(document.getElementById('repOutput').innerText)" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded border border-slate-300"><i class="fa-solid fa-copy text-emerald-600 mr-1"></i> Copy to Clipboard</button>
+                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Official Comment</h3>
+                        <button onclick="navigator.clipboard.writeText(document.getElementById('repOutput').innerText)" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
+                            <i class="fa-solid fa-copy text-amber-600 mr-1"></i> Copy Text
+                        </button>
                     </div>
-                    <div id="repOutput" class="bg-slate-50 p-4 rounded-lg border border-slate-200 font-serif text-slate-800 leading-relaxed min-h-[200px]">
-                        <p class="text-slate-400 italic text-center py-12">Generated official student review remarks will appear here...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB CONTENT 4: CONTEXTUAL STORY BUILDER -->
-        <section id="contextStory-content" class="tab-panel hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="font-bold text-slate-900 border-b pb-2">Local Context Settings</h3>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Botswana Setting</label>
-                        <select id="storySetting" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
-                            <option value="Chobe River and Wildlife">Chobe River Ecosystem</option>
-                            <option value="Maun Cattle Post Life">Maun & Village Cattle Post</option>
-                            <option value="Gaborone City & Commerce">Gaborone City & Trade</option>
-                            <option value="Okavango Delta Tourism">Okavango Delta Tourism</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 mb-1">Target Vocabulary Words</label>
-                        <input type="text" id="storyWords" placeholder="e.g. conservation, cattle, drought, boreholes" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
-                    </div>
-                    <button onclick="generateStory()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-lg text-sm shadow transition">
-                        Build Story & Questions
-                    </button>
-                </div>
-
-                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <div id="storyOutput" class="prose max-w-none text-slate-800 text-sm min-h-[350px]">
-                        <div class="text-center text-slate-400 py-16">
-                            <i class="fa-solid fa-book text-4xl mb-3"></i>
-                            <p>Generate comprehension passages anchored in local Botswana environments.</p>
-                        </div>
+                    <div id="repOutput" class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-serif text-slate-800 leading-relaxed min-h-[200px]">
+                        <p class="text-slate-400 italic text-center py-12 text-xs">Generated report remarks will appear here...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB CONTENT 5: TEACHER ACADEMY (CPD) -->
-        <section id="teacherAcademy-content" class="tab-panel hidden">
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-6">
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h3 class="font-bold text-lg text-slate-900">Teacher Upskilling Academy</h3>
-                        <p class="text-xs text-slate-500">Continuous Professional Development (CPD) for Modern Classroom Tech</p>
-                    </div>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full">Level 1: AI Foundations</span>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
-                        <div class="text-emerald-600 font-bold text-lg mb-1">01. WhatsApp Quizzes</div>
-                        <p class="text-xs text-slate-600 mb-3">How to format automated test questions for student revision groups.</p>
-                        <button onclick="playModule(1)" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded">Start 2-Min Lesson</button>
-                    </div>
-                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
-                        <div class="text-emerald-600 font-bold text-lg mb-1">02. Phone Scanning</div>
-                        <p class="text-xs text-slate-600 mb-3">Grade handwritten tests using free phone scanning tools.</p>
-                        <button onclick="playModule(2)" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded">Start 2-Min Lesson</button>
-                    </div>
-                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
-                        <div class="text-emerald-600 font-bold text-lg mb-1">03. Digital Aids</div>
-                        <p class="text-xs text-slate-600 mb-3">Build interactive classroom prompts using offline PowerPoint tools.</p>
-                        <button onclick="playModule(3)" class="text-xs bg-slate-900 text-white px-3 py-1.5 rounded">Start 2-Min Lesson</button>
-                    </div>
-                </div>
-
-                <!-- Certificate Claim Box -->
-                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg flex justify-between items-center">
-                    <div>
-                        <h4 class="font-bold text-sm text-emerald-950">Claim Your CPD Certificate</h4>
-                        <p class="text-xs text-emerald-800">Complete all 3 micro-lessons to generate your printable "TechWise AI-Empowered Educator" Certificate.</p>
-                    </div>
-                    <button onclick="generateCertificate()" class="bg-emerald-600 text-white font-semibold text-xs px-4 py-2 rounded hover:bg-emerald-700">Download Certificate</button>
-                </div>
+        <!-- SUBORDINATE TOOLS (Moved down to keep UI clean) -->
+        <div class="mt-12 pt-6 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+            <span>TechWise Professional Suite</span>
+            <div class="space-x-4">
+                <button onclick="toggleAdminModal()" class="hover:text-slate-900 font-semibold">Master Admin</button>
+                <button onclick="openPaymentModal()" class="hover:text-slate-900 font-semibold text-amber-600">Subscribe (BWP 99)</button>
             </div>
-        </section>
+        </div>
 
     </main>
 
-    <!-- Master Admin Modal -->
-    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
-        <div class="bg-white max-w-2xl w-full rounded-xl shadow-2xl overflow-hidden">
-            <div class="bg-slate-900 text-white p-4 flex justify-between items-center">
-                <h3 class="font-bold text-sm"><i class="fa-solid fa-user-shield text-emerald-400 mr-2"></i> Master Admin Control Panel</h3>
-                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-white">&times;</button>
-            </div>
-            <div class="p-6 space-y-6">
-                <!-- Metrics -->
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="bg-slate-50 p-3 rounded-lg border text-center">
-                        <div class="text-xs text-slate-500">Total Teachers</div>
-                        <div class="text-xl font-bold text-slate-900">142</div>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border text-center">
-                        <div class="text-xs text-slate-500">Active Paid Subscriptions</div>
-                        <div class="text-xl font-bold text-emerald-600">89</div>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-lg border text-center">
-                        <div class="text-xs text-slate-500">Monthly Revenue (BWP)</div>
-                        <div class="text-xl font-bold text-blue-600">P8,811</div>
-                    </div>
-                </div>
-
-                <!-- Subscriber Management Table -->
-                <div>
-                    <h4 class="font-bold text-xs text-slate-700 uppercase mb-2">Recent User Subscriptions</h4>
-                    <div class="border rounded-lg overflow-x-auto text-xs">
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-100 text-slate-600">
-                                <tr>
-                                    <th class="p-2">Teacher Name</th>
-                                    <th class="p-2">School District</th>
-                                    <th class="p-2">Status</th>
-                                    <th class="p-2">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y">
-                                <tr>
-                                    <td class="p-2 font-medium">Mpho Kgosi</td>
-                                    <td class="p-2">Central District</td>
-                                    <td class="p-2"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Active (BWP 99)</span></td>
-                                    <td class="p-2"><button class="text-blue-600 hover:underline">Manage</button></td>
-                                </tr>
-                                <tr>
-                                    <td class="p-2 font-medium">Tshepo Molefe</td>
-                                    <td class="p-2">Kweneng District</td>
-                                    <td class="p-2"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded">Trial (1 Credit)</span></td>
-                                    <td class="p-2"><button class="text-blue-600 hover:underline">Extend</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- User Auth Modal -->
+    <!-- Modals -->
     <div id="authModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
-        <div class="bg-white max-w-md w-full rounded-xl shadow-2xl p-6">
+        <div class="bg-white max-w-sm w-full rounded-2xl shadow-2xl p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="font-bold text-slate-900">Teacher Login / Account</h3>
+                <h3 class="font-extrabold text-slate-900">Teacher Sign-In</h3>
                 <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
             </div>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">Mobile Phone Number or Email</label>
-                    <input type="text" id="authIdentifier" placeholder="+267 71 234 567" required class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile Phone / Email</label>
+                    <input type="text" id="authIdentifier" placeholder="+267 71 000 000" required class="w-full text-sm border-2 border-slate-200 rounded-xl p-3">
                 </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-700 mb-1">School Region</label>
-                    <select id="authDistrict" class="w-full text-sm border border-slate-300 rounded-lg p-2.5">
-                        <option value="Central">Central District</option>
-                        <option value="Kweneng">Kweneng District</option>
-                        <option value="South-East">South-East District (Gaborone)</option>
-                        <option value="North-West">North-West District (Maun)</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-emerald-600 text-white font-semibold py-2.5 rounded-lg text-sm hover:bg-emerald-700">
-                    Access TechWise Platform
+                <button type="submit" class="w-full bg-slate-900 text-amber-400 font-bold py-3 rounded-xl text-sm">
+                    Sign In to TechWise
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Local BWP Payment Gateway Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
-        <div class="bg-white max-w-md w-full rounded-xl shadow-2xl p-6">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="font-bold text-slate-900">Subscribe to TechWise Pro</h3>
-                <button onclick="closePaymentModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
-            </div>
-            
-            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg mb-4 text-center">
-                <div class="text-2xl font-bold text-emerald-950">BWP 99 <span class="text-xs font-normal text-emerald-800">/ Month</span></div>
-                <p class="text-xs text-emerald-800 mt-1">Unlimited Exam Papers, Lesson Plans, and Report Reviews</p>
+        <div class="bg-white max-w-sm w-full rounded-2xl shadow-2xl p-6 text-center">
+            <h3 class="font-extrabold text-lg text-slate-900 mb-1">Upgrade to Pro</h3>
+            <p class="text-xs text-slate-500 mb-4">Unlimited access for all terms</p>
+
+            <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl mb-5">
+                <div class="text-3xl font-black text-slate-900">BWP 99 <span class="text-xs font-semibold text-slate-500">/ mo</span></div>
             </div>
 
-            <div class="space-y-3 mb-6">
-                <label class="block text-xs font-medium text-slate-700">Select Local Payment Method</label>
-                <div class="grid grid-cols-2 gap-3">
-                    <button type="button" onclick="selectPay('Orange Money')" class="border rounded-lg p-3 text-left hover:border-emerald-600 flex items-center space-x-2">
-                        <i class="fa-solid fa-mobile-screen text-amber-500"></i>
-                        <span class="text-xs font-semibold">Orange Money (*145#)</span>
-                    </button>
-                    <button type="button" onclick="selectPay('Card')" class="border rounded-lg p-3 text-left hover:border-emerald-600 flex items-center space-x-2">
-                        <i class="fa-solid fa-credit-card text-blue-600"></i>
-                        <span class="text-xs font-semibold">FNB / Card (DPO)</span>
-                    </button>
-                </div>
-            </div>
-
-            <button onclick="processPayment()" class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-lg text-sm hover:bg-emerald-700 shadow">
-                Confirm BWP 99 Payment
+            <button onclick="processPayment()" class="w-full bg-slate-900 text-amber-400 font-bold py-3.5 rounded-xl text-sm shadow">
+                Pay with Orange Money / Card
             </button>
+            <button onclick="closePaymentModal()" class="mt-2 text-xs font-semibold text-slate-400 hover:text-slate-600">Cancel</button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-12">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <div>
-                <p class="font-semibold text-slate-300">TechWise Suite Botswana</p>
-                <p class="text-slate-500">Supporting Teachers across PSLE, JCE & BGCSE Curriculum</p>
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl p-6">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="font-bold text-slate-900"><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> Admin Overview</h3>
+                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
             </div>
-            <div class="flex space-x-6">
-                <a href="#" onclick="toggleAdminModal(); return false;" class="hover:text-slate-200">Admin Control</a>
-                <a href="#" class="hover:text-slate-200">Privacy Policy</a>
-                <a href="#" class="hover:text-slate-200">Support (*145# Help)</a>
+            <div class="grid grid-cols-2 gap-3 text-center mb-4">
+                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Subscribers</div><div class="text-lg font-bold text-slate-900">89</div></div>
+                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Revenue</div><div class="text-lg font-bold text-amber-600">P8,811</div></div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- App JavaScript Logic -->
     <script>
-        // State Management
-        let currentTab = 'quizGen';
-        let userCredits = 3;
-        let isSubscribed = false;
-
         function switchTab(tabId) {
             document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('#toolTabs button').forEach(el => el.classList.remove('active-tab'));
+            document.querySelectorAll('main > div.grid > button').forEach(el => {
+                el.classList.remove('active-tab');
+                el.classList.add('bg-white');
+            });
             
             document.getElementById(tabId + '-content').classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('active-tab');
-            currentTab = tabId;
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('bg-white');
         }
 
-        // Mock Exam Generator
         function generateAssessment() {
             const subject = document.getElementById('quizSubject').value;
             const level = document.getElementById('quizLevel').value;
             const topic = document.getElementById('quizTopic').value || 'General Syllabus';
             const count = document.getElementById('quizCount').value;
 
-            const output = document.getElementById('quizOutput');
-            output.innerHTML = `
-                <div id="printableContent">
-                    <div class="text-center border-b-2 border-slate-900 pb-4 mb-4">
-                        <h2 class="text-xl font-bold uppercase">${subject} ASSESSMENT PAPER</h2>
-                        <p class="text-xs font-semibold">${level} - Syllabi Topic: ${topic}</p>
-                        <p class="text-xs mt-1">Duration: 45 Minutes | Total Marks: ${count * 2}</p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <p class="font-bold text-xs uppercase text-slate-500">Section A: Multiple Choice & Short Answer Questions</p>
-                        ${generateQuestions(count, topic)}
-                    </div>
+            document.getElementById('quizOutput').innerHTML = `
+                <div class="text-center border-b-2 border-slate-900 pb-3 mb-4">
+                    <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-900">${subject} ASSESSMENT PAPER</h2>
+                    <p class="text-xs font-semibold text-slate-600">${level} — Topic: ${topic}</p>
+                    <p class="text-xs text-slate-400">Total Marks: ${count * 2}</p>
+                </div>
+                <div class="space-y-3">
+                    ${generateQuestions(count, topic)}
                 </div>
             `;
         }
 
         function generateQuestions(count, topic) {
-            let qHTML = '';
-            for(let i = 1; i <= count; i++) {
-                qHTML += `
-                    <div class="border-b pb-3">
-                        <p class="font-medium">${i}. Explain the importance of <strong>${topic}</strong> within the Botswana environment. [2 Marks]</p>
-                        <div class="mt-2 space-y-1 text-xs text-slate-600 pl-4">
-                            <div>A) It provides essential natural resources for local communities.</div>
-                            <div>B) It has no impact on local agriculture or climate.</div>
+            let q = '';
+            for(let i=1; i<=count; i++) {
+                q += `
+                    <div class="border-b border-slate-100 pb-2">
+                        <p class="font-semibold text-xs text-slate-800">${i}. Explain the importance of <strong>${topic}</strong> within the local environment. [2 Marks]</p>
+                        <div class="mt-1 text-[11px] text-slate-500 pl-3">
+                            <div>A) It provides essential natural resources.</div>
+                            <div>B) It has no environmental effect.</div>
                         </div>
                     </div>
                 `;
             }
-            return qHTML;
+            return q;
         }
 
-        // Mock Lesson Plan Generator
         function generateLessonPlan() {
             const subject = document.getElementById('lpSubject').value || 'Integrated Science';
-            const duration = document.getElementById('lpDuration').value;
-            const obj = document.getElementById('lpObjective').value || 'Understand core syllabus concepts.';
+            const obj = document.getElementById('lpObjective').value || 'Understand core syllabus themes.';
 
             document.getElementById('lpOutput').innerHTML = `
-                <div class="border p-4 rounded bg-white">
-                    <h3 class="font-bold text-base border-b pb-2 mb-3">${subject} Lesson Plan (${duration})</h3>
-                    <p class="text-xs mb-3"><strong>Main Objective:</strong> ${obj}</p>
-                    
-                    <table class="w-full text-xs border-collapse border border-slate-300">
-                        <thead class="bg-slate-100">
-                            <tr>
-                                <th class="border p-2">Stage</th>
-                                <th class="border p-2">Teacher Action</th>
-                                <th class="border p-2">Student Action</th>
-                                <th class="border p-2">Assessment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border p-2 font-semibold">Intro (5 min)</td>
-                                <td class="border p-2">Review prior knowledge using questions.</td>
-                                <td class="border p-2">Respond and note key points.</td>
-                                <td class="border p-2">Oral Questioning</td>
-                            </tr>
-                            <tr>
-                                <td class="border p-2 font-semibold">Core Activity (25 min)</td>
-                                <td class="border p-2">Guide group activity on local case study.</td>
-                                <td class="border p-2">Work in groups of 4 to complete worksheet.</td>
-                                <td class="border p-2">Group Observation</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="border p-4 rounded-xl bg-slate-50">
+                    <h4 class="font-bold text-sm border-b pb-2 mb-2 text-slate-900">${subject} Lesson Structure</h4>
+                    <p class="text-xs mb-3 text-slate-700"><strong>Objective:</strong> ${obj}</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-white p-2 rounded border"><strong>Introduction (5 mins):</strong> Class discussion on prior knowledge.</div>
+                        <div class="bg-white p-2 rounded border"><strong>Main Activity (25 mins):</strong> Guided group worksheet activity.</div>
+                        <div class="bg-white p-2 rounded border"><strong>Conclusion (10 mins):</strong> Class review and quick recap quiz.</div>
+                    </div>
                 </div>
             `;
         }
 
-        // Student Report Generator
         function generateReport() {
             const name = document.getElementById('repName').value || 'The student';
             const gender = document.getElementById('repGender').value;
             const pronoun = gender === 'Male' ? 'He' : 'She';
 
             document.getElementById('repOutput').innerHTML = `
-                <p>${name} has demonstrated steady academic commitment this term. ${pronoun} actively participates during class discussions and shows a firm understanding of core syllabus themes. With continued focus on handwriting and regular revision prior to final examinations, ${name} is well-positioned to achieve an outstanding grade next term. Pula!</p>
+                <p class="text-xs sm:text-sm text-slate-800">${name} has shown dedicated progress this term. ${pronoun} actively participates during classroom activities and shows a clear grasp of core concepts. With steady focus on regular revision, ${name} is well on track for excellent results. Pula!</p>
             `;
         }
 
-        // Export Functions
         function exportToPDF(elementId, filename) {
             const element = document.getElementById(elementId);
             html2pdf().from(element).save(`${filename}.pdf`);
         }
 
-        function exportToWord(elementId, filename) {
-            const content = document.getElementById(elementId).innerText;
-            const blob = new Blob(['\ufeff' + content], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${filename}.doc`;
-            a.click();
-        }
-
-        // Modals Logic
         function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
         function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
         function openPaymentModal() { document.getElementById('paymentModal').classList.remove('hidden'); }
@@ -582,15 +395,11 @@
 
         function handleLogin(e) {
             e.preventDefault();
-            const name = document.getElementById('authIdentifier').value;
-            document.getElementById('userDisplayName').innerText = `Dumela, ${name}`;
             closeAuthModal();
         }
 
         function processPayment() {
-            alert('Processing BWP 99 Subscription via Local Gateway...');
-            isSubscribed = true;
-            document.getElementById('userSubscriptionStatus').innerText = 'Pro Subscription Active';
+            alert('Processing BWP 99 Payment...');
             closePaymentModal();
         }
     </script>
