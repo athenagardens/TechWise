@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechWise BW - Stop Order & Educator Platform</title>
+    <title>TechWise BW - Advanced Educator Platform</title>
     
     <!-- External Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,11 +27,11 @@
 
     <!-- Top Navigation & Header -->
     <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
-        <!-- Trial Countdown Bar -->
+        <!-- Trial Banner -->
         <div class="bg-amber-500 text-slate-950 font-bold text-xs py-1.5 px-4 text-center flex items-center justify-center gap-2 shadow-inner">
             <i class="fa-solid fa-clock-rotate-left"></i>
             <span><strong>2-WEEK FREE TRIAL ACTIVE:</strong> Enjoy full access before your 6-Month Payroll Stop Order commences.</span>
-            <button onclick="openStopOrderModal()" class="bg-slate-950 text-amber-400 text-[11px] px-2 py-0.5 rounded font-extrabold ml-2">Setup Stop Order Mandate</button>
+            <button onclick="openStopOrderModal()" class="bg-slate-950 text-amber-400 text-[11px] px-2 py-0.5 rounded font-extrabold ml-2 hover:bg-slate-800 transition">Setup Stop Order Mandate</button>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center border-b border-slate-800">
@@ -47,8 +47,11 @@
                 </div>
             </div>
 
-            <!-- Quick Action Navigation -->
             <div class="flex items-center space-x-2">
+                <button onclick="openApiSettings()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs font-bold px-3 py-2 rounded-lg border border-amber-500/30 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-key"></i>
+                    <span class="hidden sm:inline">AI Settings</span>
+                </button>
                 <button onclick="openStopOrderModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-lg shadow-md transition flex items-center gap-1.5">
                     <i class="fa-solid fa-file-signature"></i>
                     <span>6-Month Stop Order Mandate</span>
@@ -56,7 +59,7 @@
             </div>
         </div>
 
-        <!-- MAIN TOP MENU NAVIGATION -->
+        <!-- Main Navigation Menu -->
         <div class="bg-slate-950 border-b border-slate-800">
             <div class="max-w-7xl mx-auto px-4 py-2">
                 <nav class="grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -92,7 +95,6 @@
     <!-- Main Workspace Content -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
 
-        <!-- National Curriculum Alignment Banner -->
         <div class="bg-white p-3.5 mb-6 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between text-xs">
             <div class="flex items-center space-x-3 text-slate-700 font-medium">
                 <span class="bg-amber-100 text-amber-700 p-1.5 rounded-lg">
@@ -105,7 +107,7 @@
             </div>
         </div>
 
-        <!-- SECTION 1: EXAM & QUIZ GENERATOR -->
+        <!-- EXAM & QUIZ GENERATOR -->
         <section id="quizGen-content" class="tab-panel">
             <div class="mb-4">
                 <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Exam & Quiz Paper Generator</h2>
@@ -113,22 +115,22 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Controls Panel -->
                 <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject</label>
-                        <select id="quizSubject" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                        <select id="quizSubject" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white outline-none">
                             <option value="Integrated Science">Integrated Science</option>
                             <option value="Mathematics">Mathematics</option>
                             <option value="English Language">English Language</option>
                             <option value="Social Studies">Social Studies</option>
                             <option value="Setswana">Setswana</option>
+                            <option value="Agriculture">Agriculture</option>
                         </select>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Grade Level</label>
-                        <select id="quizLevel" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                        <select id="quizLevel" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white outline-none">
                             <option value="PSLE (Standard 5-7)">PSLE (Standard 5 - 7)</option>
                             <option value="JCE (Form 1-3)">JCE (Form 1 - 3)</option>
                             <option value="BGCSE (Form 4-5)">BGCSE (Form 4 - 5)</option>
@@ -137,7 +139,15 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Syllabus Topic</label>
-                        <input type="text" id="quizTopic" placeholder="e.g., Photosynthesis, Photosynthesis" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
+                        <input type="text" id="quizTopic" placeholder="e.g., Ecosystems in Okavango, Fractions" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Number of Questions</label>
+                        <select id="quizCount" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
+                            <option value="5">5 Questions</option>
+                            <option value="10" selected>10 Questions</option>
+                        </select>
                     </div>
 
                     <button onclick="generateAssessment()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition flex justify-center items-center space-x-2">
@@ -146,46 +156,229 @@
                     </button>
                 </div>
 
-                <!-- Preview Area -->
-                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[300px]">
-                        <div class="text-center text-slate-400 py-16">
-                            <i class="fa-solid fa-file-signature text-5xl mb-3 text-slate-300"></i>
-                            <p class="text-xs font-medium">Select options on the left to generate assessment content.</p>
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center border-b pb-3 mb-4">
+                            <h3 class="font-extrabold text-xs text-slate-900 uppercase">Assessment Preview</h3>
+                            <button onclick="exportToPDF('quizOutput', 'TechWise_Assessment')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
+                                <i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> Print / Download
+                            </button>
+                        </div>
+
+                        <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[320px]">
+                            <div class="text-center text-slate-400 py-16">
+                                <i class="fa-solid fa-file-signature text-5xl mb-3 text-slate-300"></i>
+                                <p class="text-xs font-medium">Configure options on the left and click <strong>"Generate Test Paper"</strong>.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: LESSON PLANNER -->
+        <!-- LESSON PLANNER -->
         <section id="lessonPlan-content" class="tab-panel hidden">
             <div class="mb-4">
                 <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Lesson Plan Outline Builder</h2>
+                <p class="text-xs text-slate-500">Create structured 40-minute lesson plans with teacher activities and learner tasks.</p>
             </div>
-            <p class="text-xs text-slate-500">Generates 40-minute scheduled outlines with active learning tasks.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Subject & Class Level</label>
+                        <input type="text" id="lpSubject" placeholder="e.g., Social Studies, Form 2" class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Lesson Objective</label>
+                        <textarea id="lpObjective" rows="3" placeholder="e.g., Learners will identify causes of soil erosion..." class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none"></textarea>
+                    </div>
+
+                    <button onclick="generateLessonPlan()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
+                        Generate Lesson Plan
+                    </button>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center border-b pb-3 mb-4">
+                        <h3 class="font-extrabold text-xs text-slate-900 uppercase">Lesson Plan Output</h3>
+                    </div>
+                    <div id="lpOutput" class="prose max-w-none text-slate-800 text-sm min-h-[320px]">
+                        <div class="text-center text-slate-400 py-16">
+                            <i class="fa-solid fa-calendar-day text-5xl mb-3 text-slate-300"></i>
+                            <p class="text-xs font-medium">Enter your lesson details to generate the breakdown.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- SECTION 3: STUDENT REPORT WRITER -->
+        <!-- STUDENT REPORT WRITER -->
         <section id="studentReport-content" class="tab-panel hidden">
             <div class="mb-4">
                 <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Student Report Remark Generator</h2>
+                <p class="text-xs text-slate-500">Generate constructive end-of-term remarks formatted in English and Setswana.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Student Profile</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50">
+                            <select id="repGender" class="text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50">
+                                <option value="Male">Boy</option>
+                                <option value="Female">Girl</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Performance Details</label>
+                        <textarea id="repNotes" rows="3" placeholder="e.g., Score: 78%, strong engagement, punctual..." class="w-full text-sm font-medium border border-slate-200 rounded-xl p-3 bg-slate-50"></textarea>
+                    </div>
+
+                    <button onclick="generateReport()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
+                        Generate Remark
+                    </button>
+                </div>
+
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center border-b pb-3 mb-4">
+                        <h3 class="font-extrabold text-xs text-slate-900 uppercase">Generated Remarks</h3>
+                        <button onclick="navigator.clipboard.writeText(document.getElementById('repOutput').innerText)" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
+                            <i class="fa-solid fa-copy text-amber-600 mr-1"></i> Copy Text
+                        </button>
+                    </div>
+                    <div id="repOutput" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-sm leading-relaxed min-h-[220px]">
+                        <p class="text-slate-400 italic text-center py-12 text-xs">Generated student remarks will be displayed here...</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 4: TEACHER ACADEMY -->
+        <!-- TEACHER ACADEMY -->
         <section id="academy-content" class="tab-panel hidden">
             <div class="mb-4">
                 <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Teacher Professional Academy</h2>
+                <p class="text-xs text-slate-500">Interactive micro-modules designed to strengthen classroom teaching methods.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">BEC Objective Assessment Construction</h3>
+                        <p class="text-xs text-slate-500 mb-3">Master structural design for multiple-choice and short-answer assessment items.</p>
+                    </div>
+                    <button onclick="openAcademyModule('bec')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
+                        Open Module
+                    </button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">Digital Pedagogy & Blended Learning</h3>
+                        <p class="text-xs text-slate-500 mb-3">Incorporate offline multimedia tools into rural and urban classrooms.</p>
+                    </div>
+                    <button onclick="openAcademyModule('digital')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
+                        Open Module
+                    </button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-500 text-2xl mb-2"><i class="fa-solid fa-users-gear"></i></div>
+                        <h3 class="font-extrabold text-sm text-slate-900 mb-1">Mixed-Ability Classroom Management</h3>
+                        <p class="text-xs text-slate-500 mb-3">Strategies for differentiating instruction in larger class settings.</p>
+                    </div>
+                    <button onclick="openAcademyModule('mixed')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2.5 rounded-lg transition">
+                        Open Module
+                    </button>
+                </div>
+            </div>
+
+            <div id="academyModuleContainer" class="hidden bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex justify-between items-center border-b pb-3 mb-4">
+                    <h3 id="academyModuleTitle" class="font-extrabold text-base text-slate-900">Module Viewer</h3>
+                    <button onclick="closeAcademyModule()" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border">Close Module</button>
+                </div>
+                <div id="academyModuleBody" class="prose max-w-none text-slate-700 text-sm"></div>
             </div>
         </section>
 
-        <!-- SECTION 5: GLOBAL EDTECH RADAR -->
+        <!-- GLOBAL EDTECH RADAR -->
         <section id="globalRadar-content" class="tab-panel hidden">
             <div class="mb-4">
-                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Global Education Radar</h2>
+                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                    Global Education Radar
+                    <span class="text-xs font-semibold bg-amber-500/10 text-amber-700 border border-amber-500/30 px-2 py-0.5 rounded-full">World Insights</span>
+                </h2>
+                <p class="text-xs text-slate-500">Discover key trends and innovations shaping modern classrooms globally.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">China</span>
+                            <span class="text-[11px] text-slate-400">Classroom Tech</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900 mb-1">Smart Electronic Desks & Focus Aids</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Interactive touch surface desks providing real-time feedback and direct exercise submission to the instructor's display.</p>
+                    </div>
+                    <button onclick="summarizeGlobalTech('China Smart Desks')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
+                        View Brief
+                    </button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">Singapore</span>
+                            <span class="text-[11px] text-slate-400">Automated Grading</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900 mb-1">AI Marking Assistants for Open Essays</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Automated evaluation systems giving formative language feedback to help teachers mark written work faster.</p>
+                    </div>
+                    <button onclick="summarizeGlobalTech('Singapore AI Marking')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
+                        View Brief
+                    </button>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Kenya</span>
+                            <span class="text-[11px] text-slate-400">Rural Access</span>
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900 mb-1">Solar Digital Hubs & Offline Kits</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-3">Solar-powered server units broadcasting digital learning materials to offline student devices in remote regions.</p>
+                    </div>
+                    <button onclick="summarizeGlobalTech('Kenya Solar Hubs')" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 text-xs font-bold py-2 rounded-lg transition">
+                        View Brief
+                    </button>
+                </div>
+            </div>
+
+            <div id="radarDetail" class="hidden mt-6 bg-slate-900 text-white p-6 rounded-2xl shadow-lg border border-slate-800">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-3">
+                    <h3 id="radarTitle" class="font-bold text-sm text-amber-400">Tech Brief Details</h3>
+                    <button onclick="document.getElementById('radarDetail').classList.add('hidden')" class="text-slate-400 hover:text-white text-xs">&times; Close</button>
+                </div>
+                <p id="radarContent" class="text-xs text-slate-300 leading-relaxed"></p>
             </div>
         </section>
+
+        <!-- Footer -->
+        <div class="mt-12 pt-6 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+            <span>TechWise Professional Platform &copy; 2026</span>
+            <button onclick="toggleAdminModal()" class="hover:text-slate-900 font-semibold text-slate-600">
+                <i class="fa-solid fa-user-shield mr-1"></i> Admin Panel
+            </button>
+        </div>
 
     </main>
 
@@ -203,33 +396,31 @@
                 <button onclick="closeStopOrderModal()" class="text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
             </div>
 
-            <form onsubmit="submitStopOrder(event)" class="space-y-4 text-xs">
+            <form id="stopOrderForm" onsubmit="submitStopOrder(event)" class="space-y-4 text-xs">
                 
                 <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-amber-900 leading-relaxed">
                     <strong>Mandate Terms:</strong> By completing this agreement, you authorize a recurring <strong>Payroll Stop Order</strong> for a fixed period of <strong>6 months</strong> starting automatically at the conclusion of your 14-day free trial.
                 </div>
 
-                <!-- Teacher Identification Details -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block font-bold text-slate-700 uppercase mb-1">Full Name (as on Payroll)</label>
-                        <input type="text" required placeholder="e.g. Kgosi Motswai" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                        <input type="text" id="soName" required placeholder="e.g. Kgosi Motswai" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 uppercase mb-1">Omang / National ID</label>
-                        <input type="text" required placeholder="e.g. 123456789" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                        <input type="text" id="soOmang" required placeholder="e.g. 123456789" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 uppercase mb-1">Payroll / Treasury Number</label>
-                        <input type="text" required placeholder="e.g. P987654" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                        <input type="text" id="soPayroll" required placeholder="e.g. P987654" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 uppercase mb-1">School / Workstation</label>
-                        <input type="text" required placeholder="e.g. Moeding College" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                        <input type="text" id="soStation" required placeholder="e.g. Moeding College" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
                     </div>
                 </div>
 
-                <!-- Union Membership & Tier selection -->
                 <div class="border-t pt-3">
                     <label class="block font-bold text-slate-700 uppercase mb-2">Union Status & Monthly Rate</label>
                     <div class="grid grid-cols-2 gap-3">
@@ -250,7 +441,6 @@
                     </div>
                 </div>
 
-                <!-- Mandate Schedule Summary -->
                 <div class="bg-slate-900 text-white p-4 rounded-xl text-xs space-y-1">
                     <div class="flex justify-between">
                         <span class="text-slate-400">Trial Period:</span>
@@ -266,10 +456,9 @@
                     </div>
                 </div>
 
-                <!-- Electronic Signature Authorization -->
                 <div>
                     <label class="block font-bold text-slate-700 uppercase mb-1">Digital Signature (Type Full Name)</label>
-                    <input type="text" required placeholder="I hereby authorize payroll deduction" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                    <input type="text" id="soSignature" required placeholder="I hereby authorize payroll deduction" class="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50">
                 </div>
 
                 <div class="flex items-start gap-2">
@@ -277,19 +466,66 @@
                     <label for="agreeTerms" class="text-[11px] text-slate-600">I confirm that the government payroll unit is authorized to deduct the specified monthly sum for 6 months after my 14-day trial ends.</label>
                 </div>
 
-                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3 rounded-xl shadow transition text-sm">
-                    Submit Stop Order Authorization
-                </button>
+                <div class="flex gap-2">
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3 rounded-xl shadow transition text-sm">
+                        Submit Stop Order Authorization
+                    </button>
+                    <button type="button" onclick="exportStopOrderPDF()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-4 py-3 rounded-xl border text-xs whitespace-nowrap">
+                        <i class="fa-solid fa-download mr-1"></i> Save Form PDF
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Script Logic -->
+    <!-- API Key Modal -->
+    <div id="apiModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
+        <div class="bg-white max-w-md w-full rounded-2xl shadow-2xl p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-extrabold text-slate-900 text-sm">Configure AI Engine</h3>
+                <button onclick="closeApiSettings()" class="text-slate-400 hover:text-slate-600">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-xs text-slate-500">Enter your Google Gemini API key below to enable direct live AI question generation.</p>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Gemini API Key</label>
+                    <input type="password" id="geminiApiKey" placeholder="AIzaSy..." class="w-full text-sm border border-slate-200 rounded-xl p-3 bg-slate-50 outline-none">
+                </div>
+                <button onclick="saveApiKey()" class="w-full bg-slate-900 text-amber-400 font-bold py-3 rounded-xl text-sm">
+                    Save Key
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
+        <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl p-6">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> Admin Management Dashboard</h3>
+                <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-center mb-4">
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200"><div class="text-xs text-slate-500">Active Stop Orders</div><div class="text-lg font-bold text-slate-900">142</div></div>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200"><div class="text-xs text-slate-500">Monthly Payroll Total</div><div class="text-lg font-bold text-amber-600">P17,040</div></div>
+            </div>
+            <p class="text-xs text-slate-500">Teacher registration metrics and payroll deduction tracking interface.</p>
+        </div>
+    </div>
+
+    <!-- Script Logic Engine -->
     <script>
+        let selectedRate = 120;
+
         function openStopOrderModal() { document.getElementById('stopOrderModal').classList.remove('hidden'); }
         function closeStopOrderModal() { document.getElementById('stopOrderModal').classList.add('hidden'); }
+        function openApiSettings() { document.getElementById('apiModal').classList.remove('hidden'); }
+        function closeApiSettings() { document.getElementById('apiModal').classList.add('hidden'); }
+        function saveApiKey() { alert('API key saved locally.'); closeApiSettings(); }
+        function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); }
 
         function updateMandateSummary(rate) {
+            selectedRate = rate;
             document.getElementById('mandateTotalDisplay').innerText = `P${rate}.00 / mo`;
         }
 
@@ -299,28 +535,161 @@
             closeStopOrderModal();
         }
 
+        function exportStopOrderPDF() {
+            const form = document.getElementById('stopOrderForm');
+            html2pdf().from(form).save('TechWise_StopOrder_Mandate.pdf');
+        }
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('menu-btn-active'));
+            document.querySelectorAll('.menu-btn').forEach(el => {
+                el.classList.remove('menu-btn-active');
+                el.classList.add('bg-slate-900');
+            });
+            
             document.getElementById(tabId + '-content').classList.remove('hidden');
-            document.getElementById('tab-' + tabId).classList.add('menu-btn-active');
+            const activeBtn = document.getElementById('tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('menu-btn-active');
+                activeBtn.classList.remove('bg-slate-900');
+            }
         }
 
         function generateAssessment() {
             const subject = document.getElementById('quizSubject').value;
             const level = document.getElementById('quizLevel').value;
-            const topic = document.getElementById('quizTopic').value || 'Syllabus Core';
+            const topic = document.getElementById('quizTopic').value || 'General Curriculum Topics';
+            const count = parseInt(document.getElementById('quizCount').value);
+
+            let questionsHtml = '';
+            for (let i = 1; i <= count; i++) {
+                questionsHtml += `
+                    <div class="border-b border-slate-100 pb-3 mb-3">
+                        <p class="font-semibold text-xs text-slate-800">${i}. Analyze the primary principles of <strong>${topic}</strong> within the context of ${subject}. [2 Marks]</p>
+                        <div class="mt-1.5 text-[11px] text-slate-500 pl-3 space-y-0.5">
+                            <div>A) Primary natural or conceptual function</div>
+                            <div>B) Secondary application or environmental effect</div>
+                        </div>
+                    </div>
+                `;
+            }
 
             document.getElementById('quizOutput').innerHTML = `
-                <div class="border-b-2 border-slate-900 pb-3 mb-4 text-center">
-                    <h3 class="font-extrabold text-slate-900 uppercase">${subject} ASSESSMENT PAPER</h3>
-                    <p class="text-xs text-slate-600">${level} | Topic: ${topic}</p>
+                <div class="text-center border-b-2 border-slate-900 pb-3 mb-4">
+                    <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-900">${subject} ASSESSMENT PAPER</h2>
+                    <p class="text-xs font-semibold text-slate-600">${level} — Topic: ${topic}</p>
+                    <p class="text-xs text-slate-400 mt-0.5">Total Marks: ${count * 2}</p>
                 </div>
-                <div class="space-y-3 text-xs">
-                    <p>1. Explain key structural concepts relating to <strong>${topic}</strong> within ${subject}. [5 Marks]</p>
-                    <p>2. Differentiate core components and list two practical real-world applications. [5 Marks]</p>
+                <div class="space-y-2">
+                    ${questionsHtml}
+                </div>
+                <div class="mt-6 pt-3 border-t border-slate-200">
+                    <h4 class="font-extrabold text-xs text-slate-900 uppercase mb-2">Marking Key Guide</h4>
+                    <p class="text-xs text-slate-600 italic">Award 1 Mark for correct identification of primary principle; award 1 Mark for clear contextual explanation.</p>
                 </div>
             `;
+        }
+
+        function generateLessonPlan() {
+            const subject = document.getElementById('lpSubject').value || 'Integrated Science';
+            const obj = document.getElementById('lpObjective').value || 'Comprehend main syllabus principles.';
+
+            document.getElementById('lpOutput').innerHTML = `
+                <div class="border border-slate-200 p-4 rounded-xl bg-slate-50 space-y-3">
+                    <div class="border-b pb-2">
+                        <h4 class="font-extrabold text-sm text-slate-900">${subject} Lesson Structure</h4>
+                        <p class="text-xs text-slate-600 mt-1"><strong>Target Objective:</strong> ${obj}</p>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="font-bold text-amber-700">Introduction (5 Mins):</span> Review prior knowledge and introduce key terminology.
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="font-bold text-slate-900">Main Guided Activity (25 Mins):</span> Teacher explanation followed by small group exercises.
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200">
+                            <span class="font-bold text-slate-900">Review & Wrap-Up (10 Mins):</span> Summary quiz and evaluation of key points.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateReport() {
+            const name = document.getElementById('repName').value || 'The student';
+            const gender = document.getElementById('repGender').value;
+            const pronoun = gender === 'Male' ? 'He' : 'She';
+
+            document.getElementById('repOutput').innerHTML = `
+                <div class="space-y-3">
+                    <div>
+                        <span class="text-[11px] font-bold uppercase text-slate-400 block mb-1">English Remark</span>
+                        <p class="text-xs sm:text-sm text-slate-800">${name} has shown dedicated effort this term. ${pronoun} participates constructively during class sessions and demonstrates a solid understanding of syllabus topics. Keep up the good work!</p>
+                    </div>
+                    <div class="pt-2 border-t border-slate-200">
+                        <span class="text-[11px] font-bold uppercase text-amber-600 block mb-1">Setswana Remark</span>
+                        <p class="text-xs sm:text-sm text-slate-800">${name} o tsweletse sentle mo dikgwelong tsa kotara e. O bontsha kgatlhego le go tlhaloganya dithuto tsa gagwe ka botlalo. Pula!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openAcademyModule(modKey) {
+            const container = document.getElementById('academyModuleContainer');
+            const title = document.getElementById('academyModuleTitle');
+            const body = document.getElementById('academyModuleBody');
+
+            container.classList.remove('hidden');
+
+            if (modKey === 'bec') {
+                title.innerText = 'BEC Objective Assessment Construction';
+                body.innerHTML = `
+                    <p class="mb-3">This module provides guidelines for constructing balanced assessment items aligned with BEC standards.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-3">
+                        <li>Ensure stems are clear and free of clue phrasing.</li>
+                        <li>Maintain balanced difficulty levels across lower and higher-order cognitive domains.</li>
+                        <li>Structure distractors so they represent real learning misconceptions.</li>
+                    </ul>
+                `;
+            } else if (modKey === 'digital') {
+                title.innerText = 'Digital Pedagogy & Blended Learning';
+                body.innerHTML = `
+                    <p class="mb-3">Learn how to integrate digital resources into offline and low-bandwidth school settings.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-3">
+                        <li>Use downloadable offline interactive resources for offline displays.</li>
+                        <li>Organize learning stations to share available devices efficiently.</li>
+                    </ul>
+                `;
+            } else {
+                title.innerText = 'Mixed-Ability Classroom Management';
+                body.innerHTML = `
+                    <p class="mb-3">Practical methods for managing diverse learning speeds within large classrooms.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-3">
+                        <li>Implement peer-assisted learning pairs.</li>
+                        <li>Use tiered assignment worksheets for foundation and extended practice.</li>
+                    </ul>
+                `;
+            }
+        }
+
+        function closeAcademyModule() {
+            document.getElementById('academyModuleContainer').classList.add('hidden');
+        }
+
+        function summarizeGlobalTech(topic) {
+            const detail = document.getElementById('radarDetail');
+            const title = document.getElementById('radarTitle');
+            const content = document.getElementById('radarContent');
+
+            title.innerText = `Global Insight: ${topic}`;
+            content.innerText = `Detailed Overview: ${topic} represents a key global trend in modern education technology. Incorporating clear feedback mechanisms helps teachers adapt these ideas to suit local classroom needs.`;
+            
+            detail.classList.remove('hidden');
+        }
+
+        function exportToPDF(elementId, filename) {
+            const element = document.getElementById(elementId);
+            html2pdf().from(element).save(`${filename}.pdf`);
         }
     </script>
 </body>
