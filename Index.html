@@ -6,59 +6,72 @@
     <title>TechWise BW Suite</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bwBlue: '#6CACE4',
+                        bwBlueHover: '#5297d1',
+                        bwDark: '#0F172A',
+                    }
+                }
+            }
+        }
+    </script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+<body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
 
-    <!-- Top Trial Notification Banner -->
-    <div class="bg-amber-400 text-slate-950 px-4 py-2 text-xs font-bold flex justify-between items-center shadow-md">
+    <!-- Top Notification Banner (Sky Blue Accent) -->
+    <div class="bg-bwBlue text-slate-950 px-4 py-2 text-xs font-bold flex justify-between items-center shadow-sm">
         <div class="flex items-center space-x-2 mx-auto">
-            <i class="fa-solid fa-rotate-left"></i>
+            <i class="fa-solid fa-rotate-left text-slate-950"></i>
             <span>14-DAY FREE TRIAL ACTIVE: Enjoy full access before your 6-Month Payroll Stop Order commences.</span>
         </div>
-        <button class="bg-slate-900 text-amber-400 px-3 py-1 rounded text-xs hover:bg-slate-800 transition">
+        <button class="bg-black text-white px-3 py-1 rounded text-xs hover:bg-slate-800 transition">
             Setup Stop Order Mandate
         </button>
     </div>
 
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-800 bg-slate-950 px-6 py-4 flex flex-wrap justify-between items-center gap-4">
+    <header class="border-b border-slate-200 bg-white px-6 py-4 flex flex-wrap justify-between items-center gap-4 shadow-sm">
         <div class="flex items-center space-x-3">
-            <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl font-black text-xl flex items-center justify-center w-10 h-10">
+            <div class="bg-black text-white p-2.5 rounded-xl font-black text-xl flex items-center justify-center w-10 h-10 border-2 border-bwBlue">
                 <i class="fa-solid fa-graduation-cap"></i>
             </div>
             <div>
                 <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-black tracking-tight text-white">TechWise</h1>
-                    <span class="bg-slate-800 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">BW Suite</span>
+                    <h1 class="text-xl font-black tracking-tight text-slate-900">TechWise</h1>
+                    <span class="bg-bwBlue text-slate-950 font-bold text-[10px] px-2 py-0.5 rounded-full uppercase">BW Suite</span>
                 </div>
-                <p class="text-xs text-slate-400">Empowering Botswana Educators with Global Innovation</p>
+                <p class="text-xs text-slate-500">Empowering Botswana Educators with Global Innovation</p>
             </div>
         </div>
 
-        <button onclick="toggleKeyModal()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition">
-            <i class="fa-solid fa-bolt text-amber-400"></i>
+        <button onclick="toggleKeyModal()" class="bg-slate-900 hover:bg-black text-white border border-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center space-x-2 transition shadow">
+            <i class="fa-solid fa-bolt text-bwBlue"></i>
             <span>Groq AI Settings</span>
         </button>
     </header>
 
     <!-- Main Navigation Tabs -->
     <div class="px-6 pt-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-slate-950 p-1.5 rounded-2xl border border-slate-800">
-            <button class="bg-amber-500 text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm">
+            <button id="tab-exam" onclick="switchTab('exam')" class="tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition">
                 <i class="fa-solid fa-file-pen"></i>
                 <span>Exam Generator</span>
             </button>
-            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-lesson" onclick="switchTab('lesson')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-regular fa-calendar-check"></i>
                 <span>Lesson Planner</span>
             </button>
-            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-report" onclick="switchTab('report')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-solid fa-user-pen"></i>
                 <span>Report Writer</span>
             </button>
-            <button class="text-slate-400 hover:text-white hover:bg-slate-900 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
+            <button id="tab-academy" onclick="switchTab('academy')" class="tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition">
                 <i class="fa-solid fa-book-open"></i>
                 <span>Teacher Academy</span>
             </button>
@@ -68,79 +81,165 @@
     <!-- Main Content Grid -->
     <main class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Left Column: Options Form -->
-        <div class="lg:col-span-5 bg-slate-950 border border-slate-800 p-6 rounded-2xl space-y-5">
-            <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Subject</label>
-                <select id="quizSubject" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
-                    <option value="Integrated Science">Integrated Science</option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="English Language">English Language</option>
-                    <option value="Social Studies">Social Studies</option>
-                    <option value="Setswana">Setswana</option>
-                    <option value="Agriculture">Agriculture</option>
-                </select>
+        <!-- Left Column: Dynamic Tool Form -->
+        <div class="lg:col-span-5 bg-white border border-slate-200 p-6 rounded-2xl space-y-5 shadow-sm">
+            
+            <!-- 1. EXAM GENERATOR FORM -->
+            <div id="form-exam" class="tool-form space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-bwBlue"></span>
+                    <span>Exam Generator</span>
+                </h2>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Subject</label>
+                    <select id="quizSubject" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="Integrated Science">Integrated Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="English Language">English Language</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="Setswana">Setswana</option>
+                        <option value="Agriculture">Agriculture</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Grade Level</label>
+                    <select id="quizLevel" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="PSLE (Standard 5 - 7)">PSLE (Standard 5 - 7)</option>
+                        <option value="JCE (Form 1 - 3)">JCE (Form 1 - 3)</option>
+                        <option value="BGCSE (Form 4 - 5)">BGCSE (Form 4 - 5)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Syllabus Topic</label>
+                    <input id="quizTopic" type="text" placeholder="e.g. Photosynthesis, Fractions, BEC Ecosystems" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Number of Questions</label>
+                    <select id="quizCount" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="5">5 Questions</option>
+                        <option value="10" selected>10 Questions</option>
+                        <option value="15">15 Questions</option>
+                    </select>
+                </div>
+                <button onclick="generateAIContent('exam')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
+                    <i class="fa-solid fa-bolt text-bwBlue"></i>
+                    <span>Generate Test Paper</span>
+                </button>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Grade Level</label>
-                <select id="quizLevel" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
-                    <option value="PSLE (Standard 5 - 7)">PSLE (Standard 5 - 7)</option>
-                    <option value="JCE (Form 1 - 3)">JCE (Form 1 - 3)</option>
-                    <option value="BGCSE (Form 4 - 5)">BGCSE (Form 4 - 5)</option>
-                </select>
+            <!-- 2. LESSON PLANNER FORM -->
+            <div id="form-lesson" class="tool-form hidden space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-bwBlue"></span>
+                    <span>Lesson Planner</span>
+                </h2>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Subject</label>
+                    <input id="lessonSubject" type="text" value="Social Studies" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Grade Level</label>
+                    <input id="lessonLevel" type="text" value="JCE (Form 2)" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Lesson Topic</label>
+                    <input id="lessonTopic" type="text" placeholder="e.g. Governance & Democracy in Botswana" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Duration</label>
+                    <select id="lessonDuration" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="40 minutes">40 Minutes (Single Period)</option>
+                        <option value="80 minutes">80 Minutes (Double Period)</option>
+                    </select>
+                </div>
+                <button onclick="generateAIContent('lesson')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
+                    <i class="fa-solid fa-bolt text-bwBlue"></i>
+                    <span>Generate Lesson Plan</span>
+                </button>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Syllabus Topic</label>
-                <input id="quizTopic" type="text" placeholder="e.g. Photosynthesis, Fractions, BEC Ecosystems" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+            <!-- 3. REPORT WRITER FORM -->
+            <div id="form-report" class="tool-form hidden space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-bwBlue"></span>
+                    <span>Report Writer</span>
+                </h2>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Student Name</label>
+                    <input id="studentName" type="text" placeholder="e.g. Kabelo Mokgosi" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Academic Performance</label>
+                    <select id="studentGrade" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="Grade A (Outstanding)">Grade A (Outstanding)</option>
+                        <option value="Grade B (Good Progress)">Grade B (Good Progress)</option>
+                        <option value="Grade C (Satisfactory)">Grade C (Satisfactory)</option>
+                        <option value="Grade D (Needs Improvement)">Grade D (Needs Improvement)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Observations</label>
+                    <textarea id="studentNotes" rows="3" placeholder="e.g. Excellent participation in group discussions, needs to improve homework regularity." class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none"></textarea>
+                </div>
+                <button onclick="generateAIContent('report')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
+                    <i class="fa-solid fa-bolt text-bwBlue"></i>
+                    <span>Generate Student Report</span>
+                </button>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Number of Questions</label>
-                <select id="quizCount" class="w-full bg-slate-900 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
-                    <option value="5">5 Questions</option>
-                    <option value="10" selected>10 Questions</option>
-                    <option value="15">15 Questions</option>
-                </select>
+            <!-- 4. TEACHER ACADEMY FORM -->
+            <div id="form-academy" class="tool-form hidden space-y-5">
+                <h2 class="text-sm font-bold text-slate-900 border-b border-slate-100 pb-2 uppercase tracking-wider flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-bwBlue"></span>
+                    <span>Teacher Academy</span>
+                </h2>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">PD Module</label>
+                    <select id="academyTopic" class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
+                        <option value="Inclusive Classroom Strategies">Inclusive Classroom Strategies</option>
+                        <option value="Integrating AI in Secondary Education">Integrating AI in Secondary Education</option>
+                        <option value="BEC Examination Preparation Techniques">BEC Examination Preparation Techniques</option>
+                        <option value="Classroom Management & Engagement">Classroom Management & Engagement</option>
+                    </select>
+                </div>
+                <button onclick="generateAIContent('academy')" class="w-full bg-slate-900 hover:bg-black text-white font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow transition">
+                    <i class="fa-solid fa-bolt text-bwBlue"></i>
+                    <span>Generate Training Summary</span>
+                </button>
             </div>
 
-            <button onclick="generateAssessmentWithGroq()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center space-x-2 shadow-lg transition">
-                <i class="fa-solid fa-bolt"></i>
-                <span>Generate Test Paper</span>
-            </button>
         </div>
 
-        <!-- Right Column: Output Preview -->
-        <div class="lg:col-span-7 bg-white text-slate-900 border border-slate-800 p-6 rounded-2xl min-h-[450px] shadow-2xl">
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Assessment Preview</h3>
+        <!-- Right Column: Dynamic Output Preview -->
+        <div class="lg:col-span-7 bg-white text-slate-900 border border-slate-200 p-6 rounded-2xl min-h-[450px] shadow-sm">
+            <h3 id="previewTitle" class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Exam Generator Preview</h3>
             
-            <div id="quizOutput">
+            <div id="outputContainer">
                 <div class="text-center py-20 text-slate-400">
                     <i class="fa-solid fa-file-circle-plus text-4xl mb-3 text-slate-300"></i>
-                    <p class="text-xs">Configure options on the left and click <strong>"Generate Test Paper"</strong> to create an assessment.</p>
+                    <p class="text-xs">Configure options on the left and click <strong>Generate</strong> to build content.</p>
                 </div>
             </div>
         </div>
     </main>
 
     <!-- Groq API Key Modal -->
-    <div id="keyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl max-w-md w-full space-y-4 text-slate-100 shadow-2xl">
+    <div id="keyModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl max-w-md w-full space-y-4 text-slate-900 shadow-2xl">
             <div class="flex justify-between items-center">
-                <h3 class="font-bold text-sm text-amber-400 flex items-center space-x-2">
-                    <i class="fa-solid fa-key"></i>
+                <h3 class="font-bold text-sm text-slate-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-key text-bwBlue"></i>
                     <span>Groq API Key Settings</span>
                 </h3>
-                <button onclick="toggleKeyModal()" class="text-slate-400 hover:text-white text-xs">
+                <button onclick="toggleKeyModal()" class="text-slate-400 hover:text-slate-700 text-xs">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-            <p class="text-xs text-slate-400 leading-relaxed">Enter your Groq API key (starts with <code>gsk_</code>). It will be saved securely in your browser's local storage.</p>
-            <input id="groqApiKey" type="password" placeholder="gsk_..." class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+            <p class="text-xs text-slate-600 leading-relaxed">Enter your Groq API key (starts with <code>gsk_</code>). It will be stored securely in your browser.</p>
+            <input id="groqApiKey" type="password" placeholder="gsk_..." class="w-full bg-slate-50 border border-slate-300 text-slate-900 rounded-xl p-3 text-xs focus:ring-2 focus:ring-bwBlue outline-none">
             <div class="flex justify-end space-x-2 pt-2">
-                <button onclick="toggleKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300">Cancel</button>
-                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950">Save Key</button>
+                <button onclick="toggleKeyModal()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700">Cancel</button>
+                <button onclick="saveApiKey()" class="px-4 py-2 rounded-xl text-xs font-bold bg-bwBlue hover:bg-bwBlueHover text-slate-950">Save Key</button>
             </div>
         </div>
     </div>
@@ -169,49 +268,98 @@
             toggleKeyModal();
         }
 
-        // Assessment Generation Function
-        async function generateAssessmentWithGroq() {
-            const subject = document.getElementById('quizSubject').value;
-            const level = document.getElementById('quizLevel').value;
-            const topic = document.getElementById('quizTopic').value || 'Core Syllabus';
-            const count = document.getElementById('quizCount').value;
-            const output = document.getElementById('quizOutput');
+        // Tab Switching Logic
+        function switchTab(activeTab) {
+            const tabs = ['exam', 'lesson', 'report', 'academy'];
+            const titles = {
+                exam: 'Exam Generator Preview',
+                lesson: 'Lesson Planner Preview',
+                report: 'Report Writer Preview',
+                academy: 'Teacher Academy Preview'
+            };
 
+            tabs.forEach(tab => {
+                const btn = document.getElementById(`tab-${tab}`);
+                const form = document.getElementById(`form-${tab}`);
+
+                if (tab === activeTab) {
+                    btn.className = "tab-btn bg-bwBlue text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 shadow transition";
+                    form.classList.remove('hidden');
+                } else {
+                    btn.className = "tab-btn text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition";
+                    form.classList.add('hidden');
+                }
+            });
+
+            document.getElementById('previewTitle').innerText = titles[activeTab];
+            document.getElementById('outputContainer').innerHTML = `
+                <div class="text-center py-20 text-slate-400">
+                    <i class="fa-solid fa-file-circle-plus text-4xl mb-3 text-slate-300"></i>
+                    <p class="text-xs">Configure options on the left and click <strong>Generate</strong> to build content.</p>
+                </div>
+            `;
+        }
+
+        // AI Generation Router
+        async function generateAIContent(toolType) {
+            const output = document.getElementById('outputContainer');
             output.innerHTML = `
                 <div class="text-center py-12 text-slate-600">
-                    <i class="fa-solid fa-bolt text-amber-500 text-3xl animate-bounce mb-3"></i>
-                    <p class="font-bold text-xs">Generating ${count}-Question Assessment...</p>
+                    <i class="fa-solid fa-bolt text-bwBlue text-3xl animate-bounce mb-3"></i>
+                    <p class="font-bold text-xs text-slate-700">Generating Content with AI...</p>
                 </div>
             `;
 
             const apiKey = localStorage.getItem('groq_api_key') || (document.getElementById('groqApiKey') ? document.getElementById('groqApiKey').value.trim() : '');
 
-            // Fallback to Demo Mode if no API key is provided
+            // Fallback to Demo Mode if no key exists
             if (!apiKey) {
                 setTimeout(() => {
-                    output.innerHTML = renderDemoAssessment(subject, level, topic);
+                    output.innerHTML = renderDemoContent(toolType);
                 }, 800);
                 return;
             }
 
-            // Live Groq API Call with Auto-Fallback
+            // Generate Prompt based on Tool Type
+            let prompt = "";
+            if (toolType === 'exam') {
+                const subject = document.getElementById('quizSubject').value;
+                const level = document.getElementById('quizLevel').value;
+                const topic = document.getElementById('quizTopic').value || 'Core Syllabus';
+                const count = document.getElementById('quizCount').value;
+                prompt = `Create a ${count}-question exam paper for ${level} students in Botswana taking ${subject}. Topic: "${topic}". Include multiple choice options and a marking key at the bottom. Format with clean HTML.`;
+            } else if (toolType === 'lesson') {
+                const subject = document.getElementById('lessonSubject').value;
+                const level = document.getElementById('lessonLevel').value;
+                const topic = document.getElementById('lessonTopic').value || 'General Syllabus';
+                const duration = document.getElementById('lessonDuration').value;
+                prompt = `Create a detailed ${duration} lesson plan for ${level} ${subject} in Botswana. Topic: "${topic}". Include Learning Objectives, Introduction, Main Activities, and Assessment. Format with clean HTML.`;
+            } else if (toolType === 'report') {
+                const name = document.getElementById('studentName').value || 'Student';
+                const grade = document.getElementById('studentGrade').value;
+                const notes = document.getElementById('studentNotes').value || 'Consistently attentive and hard-working.';
+                prompt = `Write a professional 2-paragraph school report card remark for a student named ${name} who received ${grade}. Notes: ${notes}. Include positive encouragement and next steps. Format with clean HTML.`;
+            } else if (toolType === 'academy') {
+                const module = document.getElementById('academyTopic').value;
+                prompt = `Write a 3-point Professional Development learning guide for Botswana teachers on the topic: "${module}". Include actionable classroom strategies. Format with clean HTML.`;
+            }
+
+            // Live API Execution
             try {
-                const prompt = `Create a ${count}-question exam paper for ${level} students in Botswana taking ${subject}. Topic: "${topic}". Include multiple choice options and a marking key at the bottom. Format with clean HTML.`;
                 const result = await callGroqAPI(prompt, apiKey);
                 output.innerHTML = result;
             } catch (err) {
                 output.innerHTML = `
                     <div class="p-4 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl space-y-2">
                         <p><strong>API Error:</strong> ${err.message}</p>
-                        <p class="text-[11px] text-red-600">Check your API key in <em>Groq AI Settings</em> or verify model access on your Groq Console.</p>
+                        <p class="text-[11px] text-red-600">Check your API key in <em>Groq AI Settings</em>.</p>
                     </div>
                 `;
             }
         }
 
-        // Resilient Groq API Caller with Fallback Models
+        // Groq API Execution
         async function callGroqAPI(prompt, apiKey) {
-            // Models to try in order of priority
             const modelsToTry = [
                 'openai/gpt-oss-20b',
                 'llama-3.1-8b-instant',
@@ -250,25 +398,41 @@
             throw new Error(lastError || "Could not reach active Groq models.");
         }
 
-        function renderDemoAssessment(subject, level, topic) {
-            return `
-                <div class="p-4 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl text-xs mb-4">
-                    <strong>Demo Mode:</strong> Add a valid Groq API Key via "Groq AI Settings" for live AI generation.
-                </div>
-                <h2 class="text-lg font-bold text-slate-900 border-b pb-2 mb-3">${subject} (${level}) - Assessment Paper</h2>
-                <p class="text-xs text-slate-500 mb-4"><strong>Topic:</strong> ${topic}</p>
-                <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-800">
-                    <li>What is the primary function of ecosystem processes in relation to <strong>${topic}</strong>?
-                        <div class="pl-3 mt-1 text-slate-600">A) Energy flow &nbsp;&nbsp; B) Soil erosion &nbsp;&nbsp; C) Condensation &nbsp;&nbsp; D) Evaporation</div>
-                    </li>
-                    <li>Identify the correct sequence associated with <strong>${topic}</strong> under BEC curriculum standards.
-                        <div class="pl-3 mt-1 text-slate-600">A) Option A &nbsp;&nbsp; B) Option B &nbsp;&nbsp; C) Option C &nbsp;&nbsp; D) Option D</div>
-                    </li>
-                </ol>
-                <hr class="my-4">
-                <h3 class="font-bold text-xs text-emerald-700">Marking Key:</h3>
-                <p class="text-xs text-slate-600">1. A &nbsp;|&nbsp; 2. B</p>
-            `;
+        // Demo Mode Previews
+        function renderDemoContent(toolType) {
+            const demoHeader = `<div class="p-3 bg-sky-50 border border-sky-200 text-slate-800 rounded-xl text-xs mb-4 flex items-center space-x-2"><i class="fa-solid fa-circle-info text-bwBlue"></i><span><strong>Demo Mode:</strong> Add a Groq API Key via "Groq AI Settings" for live AI generation.</span></div>`;
+            
+            if (toolType === 'exam') {
+                return demoHeader + `
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Integrated Science Assessment Paper</h2>
+                    <ol class="list-decimal pl-5 space-y-3 text-xs text-slate-800">
+                        <li>What is the primary function of ecosystem processes in local environments?
+                            <div class="pl-3 mt-1 text-slate-600">A) Energy flow &nbsp;&nbsp; B) Soil erosion &nbsp;&nbsp; C) Condensation &nbsp;&nbsp; D) Evaporation</div>
+                        </li>
+                    </ol>
+                `;
+            } else if (toolType === 'lesson') {
+                return demoHeader + `
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Lesson Plan: Governance & Democracy</h2>
+                    <div class="space-y-3 text-xs text-slate-800">
+                        <p><strong>Objectives:</strong> Students will understand democratic principles within Botswana's local government structure.</p>
+                        <p><strong>Main Activity (20 mins):</strong> Small group discussions examining village development committees (VDCs).</p>
+                    </div>
+                `;
+            } else if (toolType === 'report') {
+                return demoHeader + `
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Student Performance Remarks</h2>
+                    <p class="text-xs text-slate-700 leading-relaxed">Kabelo has demonstrated excellent dedication this term. Active involvement during practical group assignments shows strong leadership and problem-solving skills.</p>
+                `;
+            } else if (toolType === 'academy') {
+                return demoHeader + `
+                    <h2 class="text-base font-bold text-slate-900 border-b pb-2 mb-3">Teacher PD Module: Inclusive Classrooms</h2>
+                    <ul class="list-disc pl-5 space-y-2 text-xs text-slate-700">
+                        <li>Implement peer-assisted learning pairs to accommodate diverse learning paces.</li>
+                        <li>Use multi-modal instructional formats combining visual summaries with verbal instructions.</li>
+                    </ul>
+                `;
+            }
         }
     </script>
 </body>
