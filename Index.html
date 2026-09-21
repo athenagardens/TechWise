@@ -169,7 +169,7 @@
             toggleKeyModal();
         }
 
-        // Assessment Generation Function with Fallback Fix
+        // Assessment Generation Function
         async function generateAssessmentWithGroq() {
             const subject = document.getElementById('quizSubject').value;
             const level = document.getElementById('quizLevel').value;
@@ -186,7 +186,7 @@
 
             const apiKey = localStorage.getItem('groq_api_key') || (document.getElementById('groqApiKey') ? document.getElementById('groqApiKey').value.trim() : '');
 
-            // FIX: IF NO API KEY IS PRESENT, SHOW DEMO SAMPLE ASSESSMENT INSTEAD OF ERROR
+            // Fallback en modo demostración si no hay API Key configurada
             if (!apiKey) {
                 setTimeout(() => {
                     output.innerHTML = `
@@ -211,7 +211,7 @@
                 return;
             }
 
-            // LIVE GROQ API CALL
+            // Llamada directa a la API de Groq
             try {
                 const prompt = `Create a ${count}-question exam paper for ${level} students in Botswana taking ${subject}. Topic: "${topic}". Include multiple choice options and a marking key at the bottom. Format with clean HTML.`;
                 const result = await callGroqAPI(prompt, apiKey);
@@ -225,7 +225,7 @@
             }
         }
 
-        // Groq API Endpoint Request Handler
+        // Controlador de peticiones con el modelo activo Llama 3.1 8B Instant
         async function callGroqAPI(prompt, apiKey) {
             const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
@@ -234,7 +234,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: 'llama3-8b-8192',
+                    model: 'llama-3.1-8b-instant',
                     messages: [{ role: 'user', content: prompt }]
                 })
             });
