@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechWise - Botswana Educator Workspace</title>
     
-    <!-- Dependencies: Tailwind CSS, FontAwesome, html2pdf -->
+    <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -23,9 +23,9 @@
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- Top Header -->
+    <!-- Header Navigation -->
     <header class="bg-slate-900 text-white shadow-md border-b border-amber-500/30 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 py-3.5 flex justify-between items-center">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="bg-amber-500 text-slate-950 p-2.5 rounded-xl font-black text-xl shadow-inner">
                     <i class="fa-solid fa-graduation-cap"></i>
@@ -38,7 +38,6 @@
                 </div>
             </div>
 
-            <!-- Login / Upgrade Buttons -->
             <div class="flex items-center space-x-3">
                 <button onclick="openPaymentModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs px-3.5 py-2 rounded-lg shadow-sm transition">
                     <i class="fa-solid fa-crown mr-1"></i> Go Pro (BWP 99)
@@ -50,57 +49,60 @@
         </div>
     </header>
 
-    <!-- Main Simplified Container -->
-    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6">
+    <!-- Main Workspace -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-6">
 
-        <!-- Minimal Local Alignment Banner -->
+        <!-- Local Alignment Banner -->
         <div class="bg-slate-900 text-slate-200 p-3.5 mb-6 rounded-xl shadow-sm border border-slate-800 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="bg-amber-500/10 text-amber-400 p-1.5 rounded-lg text-sm">
                     <i class="fa-solid fa-shield-halved"></i>
                 </span>
                 <p class="text-xs font-medium">
-                    Designed for the Botswana Education System <span class="text-slate-400">(PSLE, JCE & BGCSE Curriculum Framework)</span>
+                    Aligned with local Botswana Education Standards <span class="text-slate-400">(PSLE, JCE & BGCSE Curriculum Framework)</span>
                 </p>
             </div>
             <span class="hidden sm:inline-block text-[11px] font-semibold text-amber-400 bg-amber-950/50 px-2.5 py-1 rounded-full border border-amber-800/40">
-                3 Free Credits Left
+                3 Free Credits Remaining
             </span>
         </div>
 
-        <!-- POPPING SECTION HEADER -->
+        <!-- Section Header -->
         <div class="mb-5">
             <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center">
-                <span class="inline-block w-2 h-7 bg-amber-500 rounded-full mr-3"></span>
-                Select What You Want to Create Today
+                <span class="inline-block w-2.5 h-7 bg-amber-500 rounded-full mr-3"></span>
+                Educator Tool Suite
             </h2>
-            <p class="text-xs text-slate-500 mt-1 ml-5">Choose one tool below to start generating instantly.</p>
+            <p class="text-xs text-slate-500 mt-1 ml-5">Select a tool to create custom teaching material.</p>
         </div>
 
-        <!-- Clear, Non-Overwhelming Tool Selector -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6">
-            <button onclick="switchTab('quizGen')" id="tab-quizGen" class="active-tab p-3.5 rounded-xl border-2 border-slate-200 text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm">
+        <!-- Main Navigation Tabs -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-6">
+            <button onclick="switchTab('quizGen')" id="tab-quizGen" class="active-tab p-3 rounded-xl border-2 border-slate-200 text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-sm">
                 <i class="fa-solid fa-file-pen text-amber-500"></i>
-                <span>1. Exam / Quiz Generator</span>
+                <span>Exams & Quizzes</span>
             </button>
-            <button onclick="switchTab('lessonPlan')" id="tab-lessonPlan" class="p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
+            <button onclick="switchTab('lessonPlan')" id="tab-lessonPlan" class="p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
                 <i class="fa-solid fa-calendar-check text-slate-400"></i>
-                <span>2. Lesson Planner</span>
+                <span>Lesson Planner</span>
             </button>
-            <button onclick="switchTab('studentReport')" id="tab-studentReport" class="p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
+            <button onclick="switchTab('studentReport')" id="tab-studentReport" class="p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
                 <i class="fa-solid fa-user-check text-slate-400"></i>
-                <span>3. Student Report Writer</span>
+                <span>Report Writer</span>
+            </button>
+            <button onclick="switchTab('academy')" id="tab-academy" class="p-3 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 transition shadow-sm hover:border-slate-400">
+                <i class="fa-solid fa-book-open text-slate-400"></i>
+                <span>Teacher Academy</span>
             </button>
         </div>
 
         <!-- TOOL 1: EXAM & QUIZ GENERATOR -->
         <section id="quizGen-content" class="tab-panel">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Left Input Form -->
                 <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
                     <div class="border-b border-slate-100 pb-3">
-                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Test Settings</h3>
-                        <p class="text-xs text-slate-400">Configure parameters for your exam paper</p>
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Test Parameters</h3>
+                        <p class="text-xs text-slate-400">Set paper parameters</p>
                     </div>
 
                     <div>
@@ -133,8 +135,8 @@
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Questions</label>
                         <select id="quizCount" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
-                            <option value="5">5 Questions (Short Quiz)</option>
-                            <option value="10" selected>10 Questions (Standard Test)</option>
+                            <option value="5">5 Questions</option>
+                            <option value="10" selected>10 Questions</option>
                         </select>
                     </div>
 
@@ -144,11 +146,10 @@
                     </button>
                 </div>
 
-                <!-- Right Output Display -->
                 <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-center border-b pb-3 mb-4">
-                            <h3 class="font-extrabold text-sm text-slate-900 uppercase">Document Preview</h3>
+                            <h3 class="font-extrabold text-sm text-slate-900 uppercase">Generated Document</h3>
                             <button onclick="exportToPDF('quizOutput', 'TechWise_Test')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
                                 <i class="fa-solid fa-file-pdf text-red-600 mr-1"></i> Print / PDF
                             </button>
@@ -157,7 +158,7 @@
                         <div id="quizOutput" class="prose max-w-none text-slate-800 text-sm min-h-[300px]">
                             <div class="text-center text-slate-400 py-16">
                                 <i class="fa-solid fa-file-circle-plus text-5xl mb-3 text-slate-300"></i>
-                                <p class="text-xs font-medium">Fill in the settings on the left and click <strong>"Generate Exam Paper"</strong>.</p>
+                                <p class="text-xs font-medium">Select settings on the left and click <strong>"Generate Exam Paper"</strong>.</p>
                             </div>
                         </div>
                     </div>
@@ -170,8 +171,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
                     <div class="border-b border-slate-100 pb-3">
-                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Lesson Details</h3>
-                        <p class="text-xs text-slate-400">Build a 40-minute structured plan</p>
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Lesson Plan</h3>
+                        <p class="text-xs text-slate-400">40-Minute Structured Outline</p>
                     </div>
 
                     <div>
@@ -180,8 +181,8 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Main Learning Objective</label>
-                        <textarea id="lpObjective" rows="3" placeholder="e.g. Students will identify causes of soil erosion in Botswana and propose 2 conservation steps." class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none"></textarea>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Objective</label>
+                        <textarea id="lpObjective" rows="3" placeholder="e.g. Students will identify causes of soil erosion..." class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none"></textarea>
                     </div>
 
                     <button onclick="generateLessonPlan()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
@@ -191,32 +192,32 @@
 
                 <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Lesson Outline</h3>
+                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Lesson Plan Output</h3>
                     </div>
                     <div id="lpOutput" class="prose max-w-none text-slate-800 text-sm min-h-[300px]">
                         <div class="text-center text-slate-400 py-16">
                             <i class="fa-solid fa-calendar-day text-5xl mb-3 text-slate-300"></i>
-                            <p class="text-xs font-medium">Enter your lesson objective to create a structured timeline.</p>
+                            <p class="text-xs font-medium">Enter details to generate your timetable.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TOOL 3: REPORT WRITER -->
+        <!-- TOOL 3: STUDENT REPORT WRITER -->
         <section id="studentReport-content" class="tab-panel hidden">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div class="lg:col-span-5 bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
                     <div class="border-b border-slate-100 pb-3">
-                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Student Performance</h3>
-                        <p class="text-xs text-slate-400">Generate professional report card remarks</p>
+                        <h3 class="font-extrabold text-base text-slate-900 uppercase tracking-wide">Report Remarks</h3>
+                        <p class="text-xs text-slate-400">Generate end-of-term comments</p>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Student Name & Gender</label>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Student Details</label>
                         <div class="grid grid-cols-3 gap-2">
-                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
-                            <select id="repGender" class="text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none">
+                            <input type="text" id="repName" placeholder="Name" class="col-span-2 text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50">
+                            <select id="repGender" class="text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50">
                                 <option value="Male">Boy</option>
                                 <option value="Female">Girl</option>
                             </select>
@@ -224,35 +225,62 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Quick Notes / Grade</label>
-                        <textarea id="repNotes" rows="3" placeholder="e.g. Scored 75% in term test, well behaved, needs better attendance" class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50 focus:bg-white focus:border-slate-900 outline-none"></textarea>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes / Grade</label>
+                        <textarea id="repNotes" rows="3" placeholder="e.g. Scored 75%, respectful, good attendance..." class="w-full text-sm font-medium border-2 border-slate-200 rounded-xl p-3 bg-slate-50"></textarea>
                     </div>
 
                     <button onclick="generateReport()" class="w-full bg-slate-900 hover:bg-slate-800 text-amber-400 font-extrabold py-3.5 rounded-xl text-sm shadow-md transition">
-                        Generate Report Comment
+                        Generate Comment
                     </button>
                 </div>
 
                 <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm">
                     <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Official Comment</h3>
+                        <h3 class="font-extrabold text-sm text-slate-900 uppercase">Official Remark</h3>
                         <button onclick="navigator.clipboard.writeText(document.getElementById('repOutput').innerText)" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300">
                             <i class="fa-solid fa-copy text-amber-600 mr-1"></i> Copy Text
                         </button>
                     </div>
-                    <div id="repOutput" class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-serif text-slate-800 leading-relaxed min-h-[200px]">
+                    <div id="repOutput" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-sm leading-relaxed min-h-[200px]">
                         <p class="text-slate-400 italic text-center py-12 text-xs">Generated report remarks will appear here...</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SUBORDINATE TOOLS (Moved down to keep UI clean) -->
+        <!-- TOOL 4: TEACHER ACADEMY -->
+        <section id="academy-content" class="tab-panel hidden">
+            <div class="bg-white p-6 rounded-2xl border-2 border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-extrabold text-lg text-slate-900">Teacher Professional Development Academy</h3>
+                <p class="text-xs text-slate-500">Access curated teaching guides, pedagogical tips, and classroom management resources tailored for local schools.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
+                        <i class="fa-solid fa-chalkboard-user text-amber-500 text-xl mb-2"></i>
+                        <h4 class="font-bold text-sm text-slate-900">Modern Assessment Tools</h4>
+                        <p class="text-xs text-slate-500 mt-1">Best practices for constructing BEC-standard objective test items.</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
+                        <i class="fa-solid fa-laptop-code text-amber-500 text-xl mb-2"></i>
+                        <h4 class="font-bold text-sm text-slate-900">Digital Classroom Skills</h4>
+                        <p class="text-xs text-slate-500 mt-1">Integrating multimedia tools into primary & secondary lessons.</p>
+                    </div>
+                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50">
+                        <i class="fa-solid fa-users-gear text-amber-500 text-xl mb-2"></i>
+                        <h4 class="font-bold text-sm text-slate-900">Inclusive Education</h4>
+                        <p class="text-xs text-slate-500 mt-1">Strategies for accommodating mixed-ability learners in large classes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Bar with Admin Link -->
         <div class="mt-12 pt-6 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
-            <span>TechWise Professional Suite</span>
+            <span>TechWise Professional Suite &copy; 2026</span>
             <div class="space-x-4">
-                <button onclick="toggleAdminModal()" class="hover:text-slate-900 font-semibold">Master Admin</button>
-                <button onclick="openPaymentModal()" class="hover:text-slate-900 font-semibold text-amber-600">Subscribe (BWP 99)</button>
+                <button onclick="toggleAdminModal()" class="hover:text-slate-900 font-semibold text-slate-600">
+                    <i class="fa-solid fa-user-shield mr-1"></i> Admin Dashboard
+                </button>
             </div>
         </div>
 
@@ -262,13 +290,13 @@
     <div id="authModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
         <div class="bg-white max-w-sm w-full rounded-2xl shadow-2xl p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="font-extrabold text-slate-900">Teacher Sign-In</h3>
+                <h3 class="font-extrabold text-slate-900">Teacher Account Login</h3>
                 <button onclick="closeAuthModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
             </div>
             <form onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile Phone / Email</label>
-                    <input type="text" id="authIdentifier" placeholder="+267 71 000 000" required class="w-full text-sm border-2 border-slate-200 rounded-xl p-3">
+                    <input type="text" placeholder="+267 71 000 000" required class="w-full text-sm border-2 border-slate-200 rounded-xl p-3">
                 </div>
                 <button type="submit" class="w-full bg-slate-900 text-amber-400 font-bold py-3 rounded-xl text-sm">
                     Sign In to TechWise
@@ -279,7 +307,7 @@
 
     <div id="paymentModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
         <div class="bg-white max-w-sm w-full rounded-2xl shadow-2xl p-6 text-center">
-            <h3 class="font-extrabold text-lg text-slate-900 mb-1">Upgrade to Pro</h3>
+            <h3 class="font-extrabold text-lg text-slate-900 mb-1">Upgrade to TechWise Pro</h3>
             <p class="text-xs text-slate-500 mb-4">Unlimited access for all terms</p>
 
             <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl mb-5">
@@ -297,12 +325,12 @@
     <div id="adminModal" class="fixed inset-0 bg-slate-900/60 hidden backdrop-blur-sm z-50 flex justify-center items-center p-4">
         <div class="bg-white max-w-lg w-full rounded-2xl shadow-2xl p-6">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
-                <h3 class="font-bold text-slate-900"><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> Admin Overview</h3>
+                <h3 class="font-bold text-slate-900"><i class="fa-solid fa-user-shield text-amber-500 mr-1"></i> TechWise Master Admin</h3>
                 <button onclick="toggleAdminModal()" class="text-slate-400 hover:text-slate-600">&times;</button>
             </div>
             <div class="grid grid-cols-2 gap-3 text-center mb-4">
-                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Subscribers</div><div class="text-lg font-bold text-slate-900">89</div></div>
-                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Revenue</div><div class="text-lg font-bold text-amber-600">P8,811</div></div>
+                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Active Subscribers</div><div class="text-lg font-bold text-slate-900">89</div></div>
+                <div class="bg-slate-50 p-3 rounded-xl border"><div class="text-xs text-slate-500">Monthly Revenue</div><div class="text-lg font-bold text-amber-600">P8,811</div></div>
             </div>
         </div>
     </div>
@@ -317,8 +345,10 @@
             
             document.getElementById(tabId + '-content').classList.remove('hidden');
             const activeBtn = document.getElementById('tab-' + tabId);
-            activeBtn.classList.add('active-tab');
-            activeBtn.classList.remove('bg-white');
+            if (activeBtn) {
+                activeBtn.classList.add('active-tab');
+                activeBtn.classList.remove('bg-white');
+            }
         }
 
         function generateAssessment() {
@@ -344,10 +374,10 @@
             for(let i=1; i<=count; i++) {
                 q += `
                     <div class="border-b border-slate-100 pb-2">
-                        <p class="font-semibold text-xs text-slate-800">${i}. Explain the importance of <strong>${topic}</strong> within the local environment. [2 Marks]</p>
+                        <p class="font-semibold text-xs text-slate-800">${i}. Explain the key concepts of <strong>${topic}</strong> in relation to the local ecosystem. [2 Marks]</p>
                         <div class="mt-1 text-[11px] text-slate-500 pl-3">
-                            <div>A) It provides essential natural resources.</div>
-                            <div>B) It has no environmental effect.</div>
+                            <div>A) Primary natural function</div>
+                            <div>B) Secondary environmental interaction</div>
                         </div>
                     </div>
                 `;
@@ -361,12 +391,12 @@
 
             document.getElementById('lpOutput').innerHTML = `
                 <div class="border p-4 rounded-xl bg-slate-50">
-                    <h4 class="font-bold text-sm border-b pb-2 mb-2 text-slate-900">${subject} Lesson Structure</h4>
+                    <h4 class="font-bold text-sm border-b pb-2 mb-2 text-slate-900">${subject} Lesson Outline</h4>
                     <p class="text-xs mb-3 text-slate-700"><strong>Objective:</strong> ${obj}</p>
                     <div class="space-y-2 text-xs">
-                        <div class="bg-white p-2 rounded border"><strong>Introduction (5 mins):</strong> Class discussion on prior knowledge.</div>
-                        <div class="bg-white p-2 rounded border"><strong>Main Activity (25 mins):</strong> Guided group worksheet activity.</div>
-                        <div class="bg-white p-2 rounded border"><strong>Conclusion (10 mins):</strong> Class review and quick recap quiz.</div>
+                        <div class="bg-white p-2 rounded border"><strong>Introduction (5 mins):</strong> Warm-up discussion.</div>
+                        <div class="bg-white p-2 rounded border"><strong>Main Activity (25 mins):</strong> Guided activity on concept.</div>
+                        <div class="bg-white p-2 rounded border"><strong>Conclusion (10 mins):</strong> Review and wrap-up quiz.</div>
                     </div>
                 </div>
             `;
@@ -378,7 +408,7 @@
             const pronoun = gender === 'Male' ? 'He' : 'She';
 
             document.getElementById('repOutput').innerHTML = `
-                <p class="text-xs sm:text-sm text-slate-800">${name} has shown dedicated progress this term. ${pronoun} actively participates during classroom activities and shows a clear grasp of core concepts. With steady focus on regular revision, ${name} is well on track for excellent results. Pula!</p>
+                <p class="text-xs sm:text-sm text-slate-800">${name} has shown good progress this term. ${pronoun} actively participates during classroom activities and demonstrates a sound understanding of core concepts. Pula!</p>
             `;
         }
 
@@ -393,15 +423,8 @@
         function closePaymentModal() { document.getElementById('paymentModal').classList.add('hidden'); }
         function toggleAdminModal() { document.getElementById('adminModal').classList.toggle('hidden'); }
 
-        function handleLogin(e) {
-            e.preventDefault();
-            closeAuthModal();
-        }
-
-        function processPayment() {
-            alert('Processing BWP 99 Payment...');
-            closePaymentModal();
-        }
+        function handleLogin(e) { e.preventDefault(); closeAuthModal(); }
+        function processPayment() { alert('Processing BWP 99 Payment...'); closePaymentModal(); }
     </script>
 </body>
 </html>
